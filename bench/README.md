@@ -14,7 +14,7 @@ Fossil's demonstrations found ancestry that the target documented itself. This b
 
 [holdout4.json](holdout4.json) lists ten pairs across nine languages (fpdf2, pynose, colors.js, gofrs/uuid, ratatui, Nuklear, delayed_job, Nextcloud, Radarr, Hammerspoon), committed before any 0.5 code was written and run only after 0.5 was frozen. It is in-sample from 0.6 on.
 
-[holdout5.json](holdout5.json) lists ten pairs in ten languages (nu-ansi-term, mapstructure, JSHint, PhpSpreadsheet, c-toxcore, LibreSprite, faust, Lite XL, dnSpyEx, Sorcery), committed before any 0.6 code was written and run only after 0.6 was frozen. Each tuning round needs a new holdout like these.
+[holdout5.json](holdout5.json) lists ten pairs in ten languages (nu-ansi-term, mapstructure, JSHint, PhpSpreadsheet, c-toxcore, LibreSprite, faust, Lite XL, dnSpyEx, Sorcery), committed before any 0.6 code was written and run only after 0.6 was frozen. It is in-sample from 0.7 on. Each tuning round needs a new holdout like these.
 
 Each target is investigated twice, both times as a **local snapshot with no Git history and no GitHub metadata**. That removes fork metadata and shared commits, the two strongest signals in a normal run.
 

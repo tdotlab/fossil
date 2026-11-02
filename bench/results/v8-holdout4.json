@@ -1,0 +1,1024 @@
+{
+ "tag": "v8",
+ "scored_at": "2026-11-02T23:42:17.870592+00:00",
+ "rows": [
+  {
+   "id": "fpdf2",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "reingart/pyfpdf",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"output_table_header\" \"output_table_footer\"; https://github.com/reingart/pyfpdf/blob/cb3340806c140b6e63eb4ce9d6230be84fba456e/fpdf/html.py",
+    "GitHub code search: \"calcChecksum\" \"readTableDirectory\"; https://github.com/reingart/pyfpdf/blob/cb3340806c140b6e63eb4ce9d6230be84fba456e/fpdf/ttfonts.py",
+    "Target links it on 21 lines",
+    "GitHub code search: \"get_page_format\" \"set_left_margin\"; https://github.com/reingart/pyfpdf/blob/cb3340806c140b6e63eb4ce9d6230be84fba456e/fpdf/fpdf.py",
+    "GitHub repositories search: fpdf in:name,description,readme; https://github.com/reingart/pyfpdf",
+    "Target reference at README.md:2: [![build status](https://github.com/reingart/pyfpdf/workflows/build/badge.svg)](https://github.com/reingart/pyfpdf/actions?query=workflow%3Abuild)",
+    "Target reference at README.md:34:    git clone https://github.com/reingart/pyfpdf.git",
+    "Target reference at README.md:61: https://github.com/reingart/pyfpdf or the old Google Code project page"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.9511,
+   "upstream_matches": 60,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "web2py/web2py",
+     "verdict": "code_overlap",
+     "coverage": 0.1055,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "erikkalkoken/slackchannel2pdf",
+     "verdict": "code_overlap",
+     "coverage": 0.1633,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"get_page_format\" \"set_left_margin\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"calcChecksum\" \"readTableDirectory\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"output_table_header\" \"output_table_footer\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 85,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "fpdf2",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "reingart/pyfpdf",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"output_table_header\" \"output_table_footer\"; https://github.com/reingart/pyfpdf/blob/cb3340806c140b6e63eb4ce9d6230be84fba456e/fpdf/html.py",
+    "GitHub code search: \"calcChecksum\" \"readTableDirectory\"; https://github.com/reingart/pyfpdf/blob/cb3340806c140b6e63eb4ce9d6230be84fba456e/fpdf/ttfonts.py",
+    "GitHub code search: \"get_page_format\" \"set_left_margin\"; https://github.com/reingart/pyfpdf/blob/cb3340806c140b6e63eb4ce9d6230be84fba456e/fpdf/fpdf.py",
+    "GitHub repositories search: fpdf in:name,description,readme; https://github.com/reingart/pyfpdf"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.8895,
+   "upstream_matches": 64,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "web2py/web2py",
+     "verdict": "code_overlap",
+     "coverage": 0.102,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "erikkalkoken/slackchannel2pdf",
+     "verdict": "code_overlap",
+     "coverage": 0.1602,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"get_page_format\" \"set_left_margin\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"calcChecksum\" \"readTableDirectory\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"output_table_header\" \"output_table_footer\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 85,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "pynose",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "nose-devs/nose",
+   "lead_rank": 1,
+   "lead_count": 20,
+   "lead_provenance": [
+    "GitHub code search: \"getTestCaseNames\" \"_haveVisited\"; https://github.com/nose-devs/nose/blob/7c26ad1e6b7d308cafa328ad34736d34028c122a/nose/loader.py",
+    "GitHub code search: \"NoSuchOptionError\" \"ConfiguredDefaultsOptionParser\"; https://github.com/nose-devs/nose/blob/7c26ad1e6b7d308cafa328ad34736d34028c122a/nose/config.py",
+    "GitHub code search: \"TimedOutException\" \"shortDescription\"; https://github.com/nose-devs/nose/blob/7c26ad1e6b7d308cafa328ad34736d34028c122a/nose/plugins/multiprocess.py"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.4454,
+   "upstream_matches": 77,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "singhj/locality-sensitive-hashing",
+     "verdict": "code_overlap",
+     "coverage": 0.4669,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "atsb/nose-py3",
+     "verdict": "code_overlap",
+     "coverage": 0.4586,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "pareksha/friend-recommendation-system",
+     "verdict": "code_overlap",
+     "coverage": 0.1407,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"TimedOutException\" \"shortDescription\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"NoSuchOptionError\" \"ConfiguredDefaultsOptionParser\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"getTestCaseNames\" \"_haveVisited\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 48,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "pynose",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "nose-devs/nose",
+   "lead_rank": 1,
+   "lead_count": 20,
+   "lead_provenance": [
+    "GitHub code search: \"getTestCaseNames\" \"_haveVisited\"; https://github.com/nose-devs/nose/blob/7c26ad1e6b7d308cafa328ad34736d34028c122a/nose/loader.py",
+    "GitHub code search: \"NoSuchOptionError\" \"ConfiguredDefaultsOptionParser\"; https://github.com/nose-devs/nose/blob/7c26ad1e6b7d308cafa328ad34736d34028c122a/nose/config.py",
+    "GitHub code search: \"TimedOutException\" \"shortDescription\"; https://github.com/nose-devs/nose/blob/7c26ad1e6b7d308cafa328ad34736d34028c122a/nose/plugins/multiprocess.py"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.4128,
+   "upstream_matches": 75,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "singhj/locality-sensitive-hashing",
+     "verdict": "code_overlap",
+     "coverage": 0.4396,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "atsb/nose-py3",
+     "verdict": "code_overlap",
+     "coverage": 0.4213,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "pareksha/friend-recommendation-system",
+     "verdict": "code_overlap",
+     "coverage": 0.1412,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"TimedOutException\" \"shortDescription\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"NoSuchOptionError\" \"ConfiguredDefaultsOptionParser\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"getTestCaseNames\" \"_haveVisited\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 48,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "colors.js",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "Marak/colors.js",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"translateLevel\" \"supportsColor\"; https://github.com/Marak/colors.js/blob/3b1702a5ee1a9ae357a59597a74c000585178a10/lib/system/supports-colors.js",
+    "GitHub code search: \"escapeStringRegexp\"; https://github.com/Marak/colors.js/blob/3b1702a5ee1a9ae357a59597a74c000585178a10/lib/colors.js",
+    "Target links it on 3 lines",
+    "Target reference at index.d.ts:2: // Project: https://github.com/Marak/colors.js",
+    "Target reference at safe.d.ts:2: // Project: https://github.com/Marak/colors.js",
+    "Target reference at safe.d.ts:4: // Definitions: https://github.com/Marak/colors.js"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 1.0,
+   "upstream_matches": 12,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [],
+   "code_searches": [
+    {
+     "query": "\"escapeStringRegexp\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"randomNumber\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"translateLevel\" \"supportsColor\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 20,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "colors.js",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "Marak/colors.js",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"translateLevel\" \"supportsColor\"; https://github.com/Marak/colors.js/blob/3b1702a5ee1a9ae357a59597a74c000585178a10/lib/system/supports-colors.js",
+    "GitHub code search: \"escapeStringRegexp\"; https://github.com/Marak/colors.js/blob/3b1702a5ee1a9ae357a59597a74c000585178a10/lib/colors.js"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 1.0,
+   "upstream_matches": 12,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [],
+   "code_searches": [
+    {
+     "query": "\"escapeStringRegexp\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"randomNumber\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"translateLevel\" \"supportsColor\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 20,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "gofrs-uuid",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "satori/go.uuid",
+   "lead_rank": 9,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"FromBytesOrNil\" \"FromStringOrNil\"; https://github.com/satori/go.uuid/blob/b2ce2384e17bbe0c6d34077efa39dbab3e09123b/codec.go",
+    "Target reference at README.md:23: [github.com/satori/go.uuid](https://github.com/satori/go.uuid) repository after",
+    "Target reference at README.md:25: flaws](https://github.com/satori/go.uuid/issues/73). We have decided to take"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "dolthub/doltgresql",
+     "verdict": "code_overlap",
+     "coverage": 0.5224,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "encoredev/encore",
+     "verdict": "code_overlap",
+     "coverage": 0.1934,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "auxten/postgresql-parser",
+     "verdict": "code_overlap",
+     "coverage": 0.4107,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"NewGenWithHWAF\" \"getClockSequence\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"TimestampFromV1\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"FromBytesOrNil\" \"FromStringOrNil\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 9,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "gofrs-uuid",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "satori/go.uuid",
+   "lead_rank": 9,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"FromBytesOrNil\" \"FromStringOrNil\"; https://github.com/satori/go.uuid/blob/b2ce2384e17bbe0c6d34077efa39dbab3e09123b/codec.go"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "dolthub/doltgresql",
+     "verdict": "code_overlap",
+     "coverage": 0.5224,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "encoredev/encore",
+     "verdict": "code_overlap",
+     "coverage": 0.1934,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "auxten/postgresql-parser",
+     "verdict": "code_overlap",
+     "coverage": 0.4107,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"NewGenWithHWAF\" \"getClockSequence\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"TimestampFromV1\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"FromBytesOrNil\" \"FromStringOrNil\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 9,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "ratatui",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "fdehau/tui-rs",
+   "lead_rank": 19,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Target links it on 4 lines",
+    "Target reference at CHANGELOG.md:24: This marks the first release of `ratatui`, a community-maintained fork of [tui](https://github.com/fdehau/tui-rs).",
+    "GitHub repositories search: ratatui in:name,description,readme; https://github.com/fdehau/tui-rs",
+    "GitHub repositories search: tui-rs in:name; https://github.com/fdehau/tui-rs",
+    "Target reference at tests/widgets_table.rs:732:     // based on https://github.com/fdehau/tui-rs/issues/470#issuecomment-852562848",
+    "Target reference at README.md:20: This fork was created to continue maintenance on the original TUI project. The original maintainer had created an [issue](https://github.com/fdehau/tui-rs/issues/654) explaining how he couldn't find time to continue deve",
+    "Target reference at CHANGELOG.md:155: * [curses](https://github.com/fdehau/tui-rs/blob/v0.16.0/src/backend/curses.rs)",
+    "Target reference at CHANGELOG.md:156: * [rustbox](https://github.com/fdehau/tui-rs/blob/v0.16.0/src/backend/rustbox.rs)"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "ceohobo1986/tui-rs",
+     "verdict": "code_overlap",
+     "coverage": 0.8822,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "helix-editor/helix",
+     "verdict": "code_overlap",
+     "coverage": 0.0107,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "clementtsang/bottom",
+     "verdict": "code_overlap",
+     "coverage": 0.012,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "usagi-flow/evil-helix",
+     "verdict": "code_overlap",
+     "coverage": 0.0587,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"set_background\" \"it_translates_to_and_from_coordinates\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"horizontal_margin\" \"vertical_margin\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"labels_alignment\" \"hidden_legend_constraints\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 60,
+   "target_token_warnings": 1
+  },
+  {
+   "id": "ratatui",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "fdehau/tui-rs",
+   "lead_rank": null,
+   "lead_count": 24,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "ceohobo1986/tui-rs",
+     "verdict": "code_overlap",
+     "coverage": 0.8767,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "helix-editor/helix",
+     "verdict": "code_overlap",
+     "coverage": 0.0107,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "clementtsang/bottom",
+     "verdict": "code_overlap",
+     "coverage": 0.012,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "usagi-flow/evil-helix",
+     "verdict": "code_overlap",
+     "coverage": 0.0587,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"set_background\" \"it_translates_to_and_from_coordinates\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"horizontal_margin\" \"vertical_margin\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"labels_alignment\" \"hidden_legend_constraints\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 60,
+   "target_token_warnings": 1
+  },
+  {
+   "id": "nuklear",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "vurtun/nuklear",
+   "lead_rank": 24,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub repositories search: Nuklear in:name,description,readme; https://github.com/vurtun/nuklear",
+    "Target reference at demo/sdl_opengles2/Readme.md:28: More info can be found here: https://github.com/vurtun/nuklear/issues/748"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "zacharycarter/zeal",
+     "verdict": "code_overlap",
+     "coverage": 0.8579,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "0xbigshaq/genesisos",
+     "verdict": "code_overlap",
+     "coverage": 0.1564,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "remobjects/recipes",
+     "verdict": "code_overlap",
+     "coverage": 0.1459,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "amaiolamo/flatova-opengl",
+     "verdict": "code_overlap",
+     "coverage": 0.2153,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"nk_round_up_pow2\" \"nk_get_null_rect\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"nk_rawfb_color2int\" \"nk_rawfb_int2color\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"nk_timestamp\" \"nk_color_from_byte\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 59,
+   "target_token_warnings": 42
+  },
+  {
+   "id": "nuklear",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "vurtun/nuklear",
+   "lead_rank": 21,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub repositories search: nuklear in:name,description,readme; https://github.com/vurtun/nuklear"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "zacharycarter/zeal",
+     "verdict": "code_overlap",
+     "coverage": 0.8578,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "0xbigshaq/genesisos",
+     "verdict": "code_overlap",
+     "coverage": 0.1564,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "remobjects/recipes",
+     "verdict": "code_overlap",
+     "coverage": 0.1459,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "amaiolamo/flatova-opengl",
+     "verdict": "code_overlap",
+     "coverage": 0.2152,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"nk_round_up_pow2\" \"nk_get_null_rect\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"nk_rawfb_color2int\" \"nk_rawfb_int2color\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"nk_timestamp\" \"nk_color_from_byte\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 58,
+   "target_token_warnings": 41
+  },
+  {
+   "id": "delayed_job",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "tobi/delayed_job",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"PerformableMethod\" \"display_name\"; https://github.com/tobi/delayed_job/blob/719b628bdd54566f80ae3a99c4a02dd39d386c07/lib/delayed/performable_method.rb",
+    "GitHub code search: \"RandomRubyObject\"; https://github.com/tobi/delayed_job/blob/719b628bdd54566f80ae3a99c4a02dd39d386c07/spec/delayed_method_spec.rb",
+    "GitHub code search: \"DeserializationError\" \"payload_object\"; https://github.com/tobi/delayed_job/blob/719b628bdd54566f80ae3a99c4a02dd39d386c07/lib/delayed/job.rb",
+    "GitHub repositories search: delayed_job in:name,description,readme; https://github.com/tobi/delayed_job",
+    "Target reference at delayed_job.gemspec:9:   s.homepage = \"http://github.com/tobi/delayed_job/tree/master\""
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.8873,
+   "upstream_matches": 12,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "insales/delayed_job",
+     "verdict": "code_overlap",
+     "coverage": 0.1708,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "projectfedena/delayed_job",
+     "verdict": "code_overlap",
+     "coverage": 0.9063,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"DeserializationError\" \"payload_object\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"RandomRubyObject\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"PerformableMethod\" \"display_name\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 15,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "delayed_job",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "tobi/delayed_job",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"PerformableMethod\" \"display_name\"; https://github.com/tobi/delayed_job/blob/719b628bdd54566f80ae3a99c4a02dd39d386c07/lib/delayed/performable_method.rb",
+    "GitHub code search: \"RandomRubyObject\"; https://github.com/tobi/delayed_job/blob/719b628bdd54566f80ae3a99c4a02dd39d386c07/spec/delayed_method_spec.rb",
+    "GitHub code search: \"DeserializationError\" \"payload_object\"; https://github.com/tobi/delayed_job/blob/719b628bdd54566f80ae3a99c4a02dd39d386c07/lib/delayed/job.rb",
+    "GitHub repositories search: delayed_job in:name,description,readme; https://github.com/tobi/delayed_job"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.8873,
+   "upstream_matches": 12,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "insales/delayed_job",
+     "verdict": "code_overlap",
+     "coverage": 0.1708,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "projectfedena/delayed_job",
+     "verdict": "code_overlap",
+     "coverage": 0.9063,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"DeserializationError\" \"payload_object\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"RandomRubyObject\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"PerformableMethod\" \"display_name\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 15,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "nextcloud",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "owncloud/core",
+   "lead_rank": 1,
+   "lead_count": 25,
+   "lead_provenance": [
+    "GitHub code search: \"CalDavBackend\" \"getCalendarsForUser\"; https://github.com/owncloud/core/blob/ddd0832a7dfdd972a291ec8c5d760874163dbd9c/apps/dav/lib/CalDAV/CalDavBackend.php",
+    "Target links it on 145 lines",
+    "GitHub code search: \"_initFileActions\" \"actionHandler\"; https://github.com/owncloud/core/blob/ddd0832a7dfdd972a291ec8c5d760874163dbd9c/apps/files/js/filelist.js",
+    "GitHub repositories search: ownCloud Core in:name,description,readme; https://github.com/owncloud/core",
+    "Target reference at CONTRIBUTING.md:14: * This repository ([core](https://github.com/owncloud/core/issues)) is *only* for issues within the ownCloud core code. This also includes the apps: files, encryption, external storage, sharing, deleted files, versions, ",
+    "Target reference at CONTRIBUTING.md:21:   - [ownCloud apps](https://github.com/owncloud/core/wiki/Maintainers#apps-repo)",
+    "Target reference at apps/dav/lib/Connector/Sabre/Auth.php:91: \t * @see https://github.com/owncloud/core/issues/13245",
+    "Target reference at apps/dav/lib/Connector/Sabre/DavAclPlugin.php:40:  * @see https://github.com/owncloud/core/issues/22578"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.1962,
+   "upstream_matches": 130,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "iyanuashiri/meethub",
+     "verdict": "code_overlap",
+     "coverage": 0.0113,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "centerforthebuiltenvironment/comfort_tool",
+     "verdict": "code_overlap",
+     "coverage": 0.0069,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"_initFileActions\" \"actionHandler\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"_BitrateTimer\" \"_isXHRUpload\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"CalDavBackend\" \"getCalendarsForUser\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 517,
+   "target_token_warnings": 3551
+  },
+  {
+   "id": "nextcloud",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "owncloud/core",
+   "lead_rank": 1,
+   "lead_count": 25,
+   "lead_provenance": [
+    "GitHub code search: \"CalDavBackend\" \"getCalendarsForUser\"; https://github.com/owncloud/core/blob/ddd0832a7dfdd972a291ec8c5d760874163dbd9c/apps/dav/lib/CalDAV/CalDavBackend.php",
+    "GitHub code search: \"_initFileActions\" \"actionHandler\"; https://github.com/owncloud/core/blob/ddd0832a7dfdd972a291ec8c5d760874163dbd9c/apps/files/js/filelist.js"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.1958,
+   "upstream_matches": 130,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "iyanuashiri/meethub",
+     "verdict": "code_overlap",
+     "coverage": 0.0114,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "centerforthebuiltenvironment/comfort_tool",
+     "verdict": "code_overlap",
+     "coverage": 0.0069,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"_initFileActions\" \"actionHandler\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"_BitrateTimer\" \"_isXHRUpload\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"CalDavBackend\" \"getCalendarsForUser\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 523,
+   "target_token_warnings": 3543
+  },
+  {
+   "id": "radarr",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "Sonarr/Sonarr",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Target reference at README.md:15: A fork of [Sonarr](https://github.com/Sonarr/Sonarr) to work with movies à la Couchpotato.",
+    "Target links it on 11 lines",
+    "GitHub repositories search: Sonarr in:name,description,readme; https://github.com/Sonarr/Sonarr",
+    "GitHub repositories search: Sonarr in:name; https://github.com/Sonarr/Sonarr",
+    "Target reference at debian/control:7: Vcs-Browser: https://github.com/Sonarr/Sonarr",
+    "Target reference at debian/copyright:3: Source: https://github.com/Sonarr/Sonarr",
+    "Target reference at src/NzbDrone.Api/ProviderModuleBase.cs:122:             resource.InfoLink = string.Format(\"https://github.com/Sonarr/Sonarr/wiki/Supported-{0}#{1}\",",
+    "Target reference at src/NzbDrone.Core.Test/HealthCheck/HealthCheckFixture.cs:11:         private const string WikiRoot = \"https://github.com/Sonarr/Sonarr/wiki/\";"
+   ],
+   "upstream_verdict": "declared_relationship",
+   "upstream_coverage": 0.0,
+   "upstream_matches": 0,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "bonarr/bonarr",
+     "verdict": "code_overlap",
+     "coverage": 0.4547,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "mrmcgyver/bonarr",
+     "verdict": "code_overlap",
+     "coverage": 0.4639,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"TaskAsyncHelper\" \"GenericDelegates\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"QueryBuilder\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"IDiskTransferService\" \"DiskTransferVerificationMode\"",
+     "status": "8 results"
+    }
+   ],
+   "target_source_files": 572,
+   "target_token_warnings": 2171
+  },
+  {
+   "id": "radarr",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "Sonarr/Sonarr",
+   "lead_rank": null,
+   "lead_count": 24,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "bonarr/bonarr",
+     "verdict": "code_overlap",
+     "coverage": 0.4543,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "mrmcgyver/bonarr",
+     "verdict": "code_overlap",
+     "coverage": 0.4629,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "signalr/signalr",
+     "verdict": "code_overlap",
+     "coverage": 0.0073,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "cyberpoison/sportstarr",
+     "verdict": "code_overlap",
+     "coverage": 0.4523,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"TaskAsyncHelper\" \"GenericDelegates\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"QueryBuilder\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"IDiskTransferService\" \"DiskTransferVerificationMode\"",
+     "status": "8 results"
+    }
+   ],
+   "target_source_files": 574,
+   "target_token_warnings": 2151
+  },
+  {
+   "id": "hammerspoon",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "mjolnirapp/mjolnir",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Target reference at README.md:22: Hammerspoon is a fork of [Mjolnir](https://github.com/sdegutis/mjolnir) by Steven Degutis. Mjolnir aims to be a very minimal application, with its extensions hosted externally and managed using a Lua package manager. We "
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.1529,
+   "upstream_matches": 122,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "mikalv/hydra-2",
+     "verdict": "code_overlap",
+     "coverage": 0.0858,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "yozlet/mjolnir-modules",
+     "verdict": "code_overlap",
+     "coverage": 0.1326,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "edubart/nelua-lang",
+     "verdict": "code_overlap",
+     "coverage": 0.0215,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"eventtap_event_gc\" \"eventtap_event_copy\"",
+     "status": "3 results"
+    },
+    {
+     "query": "\"lfs_lock_dir\" \"lfs_unlock_dir\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"application_eq\" \"application_gc\"",
+     "status": "3 results"
+    }
+   ],
+   "target_source_files": 183,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "hammerspoon",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "mjolnirapp/mjolnir",
+   "lead_rank": 4,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"application_eq\" \"application_gc\"; https://github.com/mjolnirapp/mjolnir/blob/1c862deb31742d4b2dc593b74c29a24b33917254/mods/application/application.m"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.1576,
+   "upstream_matches": 121,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "mikalv/hydra-2",
+     "verdict": "code_overlap",
+     "coverage": 0.0896,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "yozlet/mjolnir-modules",
+     "verdict": "code_overlap",
+     "coverage": 0.1384,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "edubart/nelua-lang",
+     "verdict": "code_overlap",
+     "coverage": 0.0224,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"eventtap_event_gc\" \"eventtap_event_copy\"",
+     "status": "3 results"
+    },
+    {
+     "query": "\"lfs_lock_dir\" \"lfs_unlock_dir\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"application_eq\" \"application_gc\"",
+     "status": "3 results"
+    }
+   ],
+   "target_source_files": 177,
+   "target_token_warnings": 0
+  }
+ ]
+}

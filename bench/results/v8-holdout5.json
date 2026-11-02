@@ -1,0 +1,1004 @@
+{
+ "tag": "v8",
+ "scored_at": "2026-11-02T23:42:19.905349+00:00",
+ "rows": [
+  {
+   "id": "nu-ansi-term",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "ogham/rust-ansi-term",
+   "lead_rank": 2,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"AnsiGenericString\" \"TextCellContents\"; https://github.com/ogham/rust-ansi-term/blob/ff7eba98d55ad609c7fcc8c7bb0859b37c7545cc/src/display.rs",
+    "GitHub code search: \"write_prefix\" \"write_suffix\"; https://github.com/ogham/rust-ansi-term/blob/ff7eba98d55ad609c7fcc8c7bb0859b37c7545cc/src/ansi.rs"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.3783,
+   "upstream_matches": 16,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "gao745/nushell-nushell",
+     "verdict": "code_overlap",
+     "coverage": 0.8377,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "cider-testing-org/nushell",
+     "verdict": "code_overlap",
+     "coverage": 0.5216,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"write_prefix\" \"write_suffix\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"AnsiGenericString\" \"TextCellContents\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"color_serialization\" \"color_deserialization\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 15,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "nu-ansi-term",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "ogham/rust-ansi-term",
+   "lead_rank": 2,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"AnsiGenericString\" \"TextCellContents\"; https://github.com/ogham/rust-ansi-term/blob/ff7eba98d55ad609c7fcc8c7bb0859b37c7545cc/src/display.rs",
+    "GitHub code search: \"write_prefix\" \"write_suffix\"; https://github.com/ogham/rust-ansi-term/blob/ff7eba98d55ad609c7fcc8c7bb0859b37c7545cc/src/ansi.rs"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.3783,
+   "upstream_matches": 16,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "gao745/nushell-nushell",
+     "verdict": "code_overlap",
+     "coverage": 0.8377,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "cider-testing-org/nushell",
+     "verdict": "code_overlap",
+     "coverage": 0.5216,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"write_prefix\" \"write_suffix\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"AnsiGenericString\" \"TextCellContents\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"color_serialization\" \"color_deserialization\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 15,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "mapstructure",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "mitchellh/mapstructure",
+   "lead_rank": null,
+   "lead_count": 24,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "grafana/dskit",
+     "verdict": "code_overlap",
+     "coverage": 0.1301,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "taubyte/tau",
+     "verdict": "code_overlap",
+     "coverage": 0.1934,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "eolinker/goku_lite",
+     "verdict": "code_overlap",
+     "coverage": 0.0976,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "windydante/clear",
+     "verdict": "code_overlap",
+     "coverage": 0.2912,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"DecodeMetadata\" \"WeakDecodeMetadata\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"typedDecodeHook\" \"cachedDecodeHook\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"isComparable\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 12,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "mapstructure",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "mitchellh/mapstructure",
+   "lead_rank": null,
+   "lead_count": 24,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "grafana/dskit",
+     "verdict": "code_overlap",
+     "coverage": 0.1301,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "taubyte/tau",
+     "verdict": "code_overlap",
+     "coverage": 0.1934,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "eolinker/goku_lite",
+     "verdict": "code_overlap",
+     "coverage": 0.0976,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "windydante/clear",
+     "verdict": "code_overlap",
+     "coverage": 0.2912,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"DecodeMetadata\" \"WeakDecodeMetadata\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"typedDecodeHook\" \"cachedDecodeHook\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"isComparable\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 12,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "jshint",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "jslint-org/jslint",
+   "lead_rank": null,
+   "lead_count": 19,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "montagejs/montage",
+     "verdict": "code_overlap",
+     "coverage": 0.0922,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "skulpt/skulpt",
+     "verdict": "code_overlap",
+     "coverage": 0.0266,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "idflood/threenodes.js",
+     "verdict": "code_overlap",
+     "coverage": 0.0855,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "seccubus/seccubus",
+     "verdict": "code_overlap",
+     "coverage": 0.1736,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"isPoorRelation\" \"note_implied\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 4,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "jshint",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "jslint-org/jslint",
+   "lead_rank": null,
+   "lead_count": 19,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "montagejs/montage",
+     "verdict": "code_overlap",
+     "coverage": 0.0922,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "skulpt/skulpt",
+     "verdict": "code_overlap",
+     "coverage": 0.0266,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "idflood/threenodes.js",
+     "verdict": "code_overlap",
+     "coverage": 0.0855,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "seccubus/seccubus",
+     "verdict": "code_overlap",
+     "coverage": 0.1736,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"isPoorRelation\" \"note_implied\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 4,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "phpspreadsheet",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "PHPOffice/PHPExcel",
+   "lead_rank": 3,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Target links it on 62 lines",
+    "GitHub repositories search: phpspreadsheet in:name,description,readme; https://github.com/PHPOffice/PHPExcel",
+    "Target reference at CHANGELOG.md:100: - Passing an array of cells to _generateRow() in the HTML/PDF Writer causes caching problems with last cell in the range - @MarkBaker [#257](https://github.com/PHPOffice/PHPExcel/issues/257)",
+    "Target reference at CHANGELOG.md:101: - Fix to empty worksheet garbage collection when using cell caching - @MarkBaker [#193](https://github.com/PHPOffice/PHPExcel/issues/193)",
+    "Target reference at CHANGELOG.md:102: - Excel2007 does not correctly mark rows as hidden - @Jazzo [#248](https://github.com/PHPOffice/PHPExcel/issues/248)",
+    "Target reference at CHANGELOG.md:103: - Fixed typo in Chart/Layout set/getYMode() - @Roy Shahbazian [#299](https://github.com/PHPOffice/PHPExcel/issues/299)",
+    "Target reference at CHANGELOG.md:104: - Fatal error: Call to a member function cellExists() line: 3327 in calculation.php if referenced worksheet doesn't exist - @EliuFlorez [#279](https://github.com/PHPOffice/PHPExcel/issues/279)",
+    "Target reference at CHANGELOG.md:105: - AdvancedValueBinder \"Division by zero\"-error - @MarkBaker [#290](https://github.com/PHPOffice/PHPExcel/issues/290)"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.1494,
+   "upstream_matches": 132,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "zyx0814/filepress",
+     "verdict": "code_overlap",
+     "coverage": 0.0204,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "chenbool/wms",
+     "verdict": "code_overlap",
+     "coverage": 0.1494,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "zyx0814/dzzoffice",
+     "verdict": "code_overlap",
+     "coverage": 0.0018,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"flushInstance\" \"setArrayReturnType\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"listWorksheetNames\" \"listWorksheetInfo\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"checkTrendArrays\" \"incompleteBeta\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 202,
+   "target_token_warnings": 149
+  },
+  {
+   "id": "phpspreadsheet",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "PHPOffice/PHPExcel",
+   "lead_rank": 17,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub repositories search: phpspreadsheet in:name,description,readme; https://github.com/PHPOffice/PHPExcel"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "zyx0814/filepress",
+     "verdict": "code_overlap",
+     "coverage": 0.0204,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "chenbool/wms",
+     "verdict": "code_overlap",
+     "coverage": 0.15,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "zyx0814/dzzoffice",
+     "verdict": "code_overlap",
+     "coverage": 0.0018,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "fingerqin/yesnophp",
+     "verdict": "code_overlap",
+     "coverage": 0.0899,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"flushInstance\" \"setArrayReturnType\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"listWorksheetNames\" \"listWorksheetInfo\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"checkTrendArrays\" \"incompleteBeta\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 202,
+   "target_token_warnings": 149
+  },
+  {
+   "id": "c-toxcore",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "irungentoo/toxcore",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"crypt_connection_id_not_valid\" \"create_cookie_request\"; https://github.com/irungentoo/toxcore/blob/bf69b54f64003d160d759068f4816b2d9b2e1e21/toxcore/net_crypto.c",
+    "GitHub code search: \"write_cryptpacket_id\" \"friend_not_valid\"; https://github.com/irungentoo/toxcore/blob/bf69b54f64003d160d759068f4816b2d9b2e1e21/toxcore/Messenger.c",
+    "GitHub code search: \"bit_by_bit_cmp\" \"get_shared_key\"; https://github.com/irungentoo/toxcore/blob/bf69b54f64003d160d759068f4816b2d9b2e1e21/toxcore/DHT.c",
+    "Target links it on 7 lines",
+    "Target reference at other/bootstrap_daemon/docker/Dockerfile:23:     git clone https://github.com/irungentoo/toxcore && \\",
+    "Target reference at other/fun/bootstrap_node_info.py:53: INFO_PACKET_ID = b\"\\xF0\"         # https://github.com/irungentoo/toxcore/blob/4940c4c62b6014d1f0586aa6aca7bf6e4ecfcf29/toxcore/network.h#L128",
+    "Target reference at other/fun/bootstrap_node_info.py:54: INFO_REQUEST_PACKET_LENGTH = 78  # https://github.com/irungentoo/toxcore/blob/881b2d900d1998981fb6b9938ec66012d049635f/other/bootstrap_node_packets.c#L28",
+    "Target reference at other/fun/bootstrap_node_info.py:59: VERSION_LENGTH = 4    # https://github.com/irungentoo/toxcore/blob/881b2d900d1998981fb6b9938ec66012d049635f/other/bootstrap_node_packets.c#L44"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.2284,
+   "upstream_matches": 159,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "open-qkd-network/qkd-net",
+     "verdict": "code_overlap",
+     "coverage": 0.1828,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "insightim/tok-ios",
+     "verdict": "code_overlap",
+     "coverage": 0.0305,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "qlcchain/confidant-station",
+     "verdict": "code_overlap",
+     "coverage": 0.0484,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"bit_by_bit_cmp\" \"get_shared_key\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"write_cryptpacket_id\" \"friend_not_valid\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"crypt_connection_id_not_valid\" \"create_cookie_request\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 120,
+   "target_token_warnings": 28
+  },
+  {
+   "id": "c-toxcore",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "irungentoo/toxcore",
+   "lead_rank": 1,
+   "lead_count": 22,
+   "lead_provenance": [
+    "GitHub code search: \"crypt_connection_id_not_valid\" \"create_cookie_request\"; https://github.com/irungentoo/toxcore/blob/bf69b54f64003d160d759068f4816b2d9b2e1e21/toxcore/net_crypto.c",
+    "GitHub code search: \"write_cryptpacket_id\" \"friend_not_valid\"; https://github.com/irungentoo/toxcore/blob/bf69b54f64003d160d759068f4816b2d9b2e1e21/toxcore/Messenger.c",
+    "GitHub code search: \"bit_by_bit_cmp\" \"get_shared_key\"; https://github.com/irungentoo/toxcore/blob/bf69b54f64003d160d759068f4816b2d9b2e1e21/toxcore/DHT.c"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.2265,
+   "upstream_matches": 160,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "open-qkd-network/qkd-net",
+     "verdict": "code_overlap",
+     "coverage": 0.1804,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "insightim/tok-ios",
+     "verdict": "code_overlap",
+     "coverage": 0.0301,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "qlcchain/confidant-station",
+     "verdict": "code_overlap",
+     "coverage": 0.048,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"bit_by_bit_cmp\" \"get_shared_key\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"write_cryptpacket_id\" \"friend_not_valid\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"crypt_connection_id_not_valid\" \"create_cookie_request\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 120,
+   "target_token_warnings": 28
+  },
+  {
+   "id": "libresprite",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "aseprite/aseprite",
+   "lead_rank": 10,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Target links it on 23 lines",
+    "Target reference at README.md:54: * [Allegro 4](http://alleg.sourceforge.net/) - [allegro4 license](https://github.com/aseprite/aseprite/tree/master/docs/licenses/allegro4-LICENSE.txt)",
+    "Target reference at README.md:55: * [FreeType](http://www.freetype.org/) - [FTL license](https://github.com/aseprite/aseprite/tree/master/docs/licenses/FTL.txt)",
+    "Target reference at README.md:56: * [Google Test](https://github.com/google/googletest) - [gtest license](https://github.com/aseprite/aseprite/tree/master/docs/licenses/gtest-LICENSE.txt)",
+    "Target reference at README.md:57: * [XFree86](http://www.x.org/) - [XFree86 license](https://github.com/aseprite/aseprite/tree/master/docs/licenses/XFree86-LICENSE.txt)",
+    "Target reference at README.md:58: * [curl](http://curl.haxx.se/) - [curl license](https://github.com/aseprite/aseprite/tree/master/docs/licenses/curl-LICENSE.txt)",
+    "Target reference at README.md:59: * [duktape](http://duktape.org/) - [MIT license](https://github.com/aseprite/aseprite/tree/master/third_party/duktape/LICENSE.txt)",
+    "Target reference at README.md:60: * [giflib](http://sourceforge.net/projects/giflib/) - [giflib license](https://github.com/aseprite/aseprite/tree/master/docs/licenses/giflib-LICENSE.txt)"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "armageddongames/zeldaclassic",
+     "verdict": "code_overlap",
+     "coverage": 0.1995,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "newcreature/allegro-legacy",
+     "verdict": "code_overlap",
+     "coverage": 0.4385,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "adventuregamestudio/ags",
+     "verdict": "code_overlap",
+     "coverage": 0.0107,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "msikma/allegro-4.2.2-xc",
+     "verdict": "code_overlap",
+     "coverage": 0.4007,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"_mono_find_glyph\" \"mono_char_length\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"fix_filename_case\" \"fix_filename_slashes\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"FUNC_LINEAR_DRAW_SPRITE_EX\" \"FUNC_LINEAR_DRAW_SPRITE\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 107,
+   "target_token_warnings": 1597
+  },
+  {
+   "id": "libresprite",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "aseprite/aseprite",
+   "lead_rank": null,
+   "lead_count": 24,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "armageddongames/zeldaclassic",
+     "verdict": "code_overlap",
+     "coverage": 0.1996,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "newcreature/allegro-legacy",
+     "verdict": "code_overlap",
+     "coverage": 0.4386,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "adventuregamestudio/ags",
+     "verdict": "code_overlap",
+     "coverage": 0.0107,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "msikma/allegro-4.2.2-xc",
+     "verdict": "code_overlap",
+     "coverage": 0.4008,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"_mono_find_glyph\" \"mono_char_length\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"fix_filename_case\" \"fix_filename_slashes\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"FUNC_LINEAR_DRAW_SPRITE_EX\" \"FUNC_LINEAR_DRAW_SPRITE\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 107,
+   "target_token_warnings": 1450
+  },
+  {
+   "id": "faust",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "robinhood/faust",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"TopicPartitionGroup\" \"ensure_TPset\"; https://github.com/robinhood/faust/blob/14f65ee6f2810ecab3cf3a8888757949dd12dbd8/faust/transport/consumer.py",
+    "GitHub code search: \"ConsumerRebalanceListener\" \"on_partitions_revoked\"; https://github.com/robinhood/faust/blob/14f65ee6f2810ecab3cf3a8888757949dd12dbd8/faust/transport/drivers/aiokafka.py",
+    "Target links it on 13 lines",
+    "GitHub code search: \"BootStrategy\" \"producer_only\"; https://github.com/robinhood/faust/blob/14f65ee6f2810ecab3cf3a8888757949dd12dbd8/faust/app/base.py",
+    "GitHub code search: \"BootStrategy\" \"producer_only\"; https://github.com/robinhood/faust/blob/14f65ee6f2810ecab3cf3a8888757949dd12dbd8/faust/types/app.py",
+    "GitHub repositories search: Python Stream Processing in:name,description,readme; https://github.com/robinhood/faust",
+    "Target reference at README.md:334: pip install https://github.com/robinhood/faust/zipball/master#egg=faust",
+    "Target reference at README.md:407: to our issue tracker at https://github.com/robinhood/faust/issues/"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.4275,
+   "upstream_matches": 158,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "irux/faust-eos-fix",
+     "verdict": "code_overlap",
+     "coverage": 0.7093,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"BootStrategy\" \"producer_only\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ConsumerRebalanceListener\" \"on_partitions_revoked\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"TopicPartitionGroup\" \"ensure_TPset\"",
+     "status": "5 results"
+    }
+   ],
+   "target_source_files": 229,
+   "target_token_warnings": 117
+  },
+  {
+   "id": "faust",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "robinhood/faust",
+   "lead_rank": 1,
+   "lead_count": 21,
+   "lead_provenance": [
+    "GitHub code search: \"TopicPartitionGroup\" \"ensure_TPset\"; https://github.com/robinhood/faust/blob/14f65ee6f2810ecab3cf3a8888757949dd12dbd8/faust/transport/consumer.py",
+    "GitHub code search: \"ConsumerRebalanceListener\" \"on_partitions_revoked\"; https://github.com/robinhood/faust/blob/14f65ee6f2810ecab3cf3a8888757949dd12dbd8/faust/transport/drivers/aiokafka.py",
+    "GitHub code search: \"BootStrategy\" \"producer_only\"; https://github.com/robinhood/faust/blob/14f65ee6f2810ecab3cf3a8888757949dd12dbd8/faust/app/base.py",
+    "GitHub code search: \"BootStrategy\" \"producer_only\"; https://github.com/robinhood/faust/blob/14f65ee6f2810ecab3cf3a8888757949dd12dbd8/faust/types/app.py",
+    "GitHub repositories search: faust-streaming in:name,description,readme; https://github.com/robinhood/faust"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.4124,
+   "upstream_matches": 158,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "irux/faust-eos-fix",
+     "verdict": "code_overlap",
+     "coverage": 0.6948,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"BootStrategy\" \"producer_only\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ConsumerRebalanceListener\" \"on_partitions_revoked\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"TopicPartitionGroup\" \"ensure_TPset\"",
+     "status": "5 results"
+    }
+   ],
+   "target_source_files": 228,
+   "target_token_warnings": 115
+  },
+  {
+   "id": "lite-xl",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "rxi/lite",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Target reference at README.md:5: A lightweight text editor written in Lua, adapted from [Lite](https://github.com/rxi/lite)",
+    "GitHub code search: \"copy_position_and_size\" \"calc_split_sizes\"; https://github.com/rxi/lite/blob/38bd9b3326c02e43f244623f97a622b11f074415/data/core/rootview.lua",
+    "GitHub repositories search: Lite in:name,description,readme; https://github.com/rxi/lite",
+    "GitHub repositories search: lite in:name; https://github.com/rxi/lite",
+    "Target reference at changelog.md:1: Lite XL is following closely [rxi/lite](https://github.com/rxi/lite) but with some enhancements."
+   ],
+   "upstream_verdict": "corroborated_derivation",
+   "upstream_coverage": 0.5817,
+   "upstream_matches": 60,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "lite-xl/lite-plugins",
+     "verdict": "code_overlap",
+     "coverage": 0.0024,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"load_session\" \"save_session\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"copy_position_and_size\" \"calc_split_sizes\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"FR_Renderer_New\" \"FR_Bitmap_New\"",
+     "status": "0 results"
+    }
+   ],
+   "target_source_files": 69,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "lite-xl",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "rxi/lite",
+   "lead_rank": 2,
+   "lead_count": 23,
+   "lead_provenance": [
+    "GitHub code search: \"copy_position_and_size\" \"calc_split_sizes\"; https://github.com/rxi/lite/blob/38bd9b3326c02e43f244623f97a622b11f074415/data/core/rootview.lua"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.5513,
+   "upstream_matches": 57,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [],
+   "code_searches": [
+    {
+     "query": "\"load_session\" \"save_session\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"copy_position_and_size\" \"calc_split_sizes\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"FR_Renderer_New\" \"FR_Bitmap_New\"",
+     "status": "0 results"
+    }
+   ],
+   "target_source_files": 65,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "dnspy",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "dnSpy/dnSpy",
+   "lead_rank": 14,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Target links it on 6 lines",
+    "GitHub repositories search: dnSpy Latest release in:name,description,readme; https://github.com/dnSpy/dnSpy",
+    "Target reference at DnSpyCommon.props:53:   <!-- .NET 5.0 SDK doesn't currently support COMReference: https://github.com/dnSpy/dnSpy/issues/1053 -->",
+    "Target reference at Extensions/dnSpy.Debugger/dnSpy.Debugger.DotNet.CorDebug/Impl/DbgEngineImpl.cs:768: \t\t\t\t// Disable OS heap debugging https://github.com/dnSpy/dnSpy/issues/1106",
+    "Target reference at Extensions/dnSpy.Debugger/dnSpy.Debugger.DotNet.Mono/Dialogs/DebugProgram/StartDebuggingOptionsPageProviderImpl.cs:40: \t\t\t// Disable mono support, see https://github.com/dnSpy/dnSpy/issues/643",
+    "Target reference at build.ps1:11: # The reason we don't use dotnet build is that dotnet build doesn't support COM references yet https://github.com/dnSpy/dnSpy/issues/1053",
+    "Target reference at dnSpy/dnSpy.Contracts.DnSpy/Controls/FontUtilities.cs:121: \t\t\t\t\t// OS, see https://github.com/dnSpy/dnSpy/issues/692",
+    "Target reference at dnSpy/dnSpy/Search/SearchControl.xaml:70:         <!-- VirtualizingStackPanel.VirtualizationMode=\"Recycling\" isn't used, see https://github.com/dnSpy/dnSpy/issues/1163 -->"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "dnspyrevived/dnspy",
+     "verdict": "code_overlap",
+     "coverage": 0.7076,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "dotfornet/dnspy",
+     "verdict": "code_overlap",
+     "coverage": 0.1733,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "toysoft/dnspy",
+     "verdict": "code_overlap",
+     "coverage": 0.5263,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "likekabin/dnspy",
+     "verdict": "code_overlap",
+     "coverage": 0.3235,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"ModuleImporterAbortedException\" \"ModuleImporterOptions\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ImportSigComparerOptions\" \"ImportTypeEqualityComparer\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ConstantType\" \"ConstantTypeVM\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 268,
+   "target_token_warnings": 3855
+  },
+  {
+   "id": "dnspy",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "dnSpy/dnSpy",
+   "lead_rank": null,
+   "lead_count": 22,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "dnspyrevived/dnspy",
+     "verdict": "code_overlap",
+     "coverage": 0.7076,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "dotfornet/dnspy",
+     "verdict": "code_overlap",
+     "coverage": 0.1733,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "toysoft/dnspy",
+     "verdict": "code_overlap",
+     "coverage": 0.5263,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "likekabin/dnspy",
+     "verdict": "code_overlap",
+     "coverage": 0.3235,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"ModuleImporterAbortedException\" \"ModuleImporterOptions\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ImportSigComparerOptions\" \"ImportTypeEqualityComparer\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ConstantType\" \"ConstantTypeVM\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 268,
+   "target_token_warnings": 3855
+  },
+  {
+   "id": "sorcery",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "NoamB/sorcery",
+   "lead_rank": 1,
+   "lead_count": 15,
+   "lead_provenance": [
+    "GitHub code search: \"SorceryController\" \"some_action_making_a_non_persisted_change_to_the_user\"; https://github.com/NoamB/sorcery/blob/4aaf38363eddf7a2982312ce68f0105dcc4ae8dc/spec/controllers/controller_activity_logging_spec.rb",
+    "GitHub code search: \"SorceryController\" \"some_action_making_a_non_persisted_change_to_the_user\"; https://github.com/NoamB/sorcery/blob/4aaf38363eddf7a2982312ce68f0105dcc4ae8dc/spec/rails_app/app/controllers/sorcery_controller.rb",
+    "GitHub code search: \"stub_all_oauth_requests\"; https://github.com/NoamB/sorcery/blob/4aaf38363eddf7a2982312ce68f0105dcc4ae8dc/spec/controllers/controller_oauth_spec.rb",
+    "GitHub code search: \"stub_all_oauth2_requests\" \"set_external_property\"; https://github.com/NoamB/sorcery/blob/4aaf38363eddf7a2982312ce68f0105dcc4ae8dc/spec/controllers/controller_oauth2_spec.rb",
+    "GitHub repositories search: Sorcery Magical Authentication in:name,description,readme; https://github.com/NoamB/sorcery",
+    "Target reference at CHANGELOG.md:84: * Activity logging feature has a new column called `last_login_from_ip_address` (string type). If you use ActiveRecord, you will have to add this column to DB ([#465](https://github.com/NoamB/sorcery/issues/465))",
+    "Target reference at lib/sorcery/controller.rb:52:       # hotfix for https://github.com/NoamB/sorcery/issues/464"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.2961,
+   "upstream_matches": 67,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [],
+   "code_searches": [
+    {
+     "query": "\"stub_all_oauth2_requests\" \"set_external_property\"",
+     "status": "4 results"
+    },
+    {
+     "query": "\"stub_all_oauth_requests\"",
+     "status": "4 results"
+    },
+    {
+     "query": "\"SorceryController\" \"some_action_making_a_non_persisted_change_to_the_user\"",
+     "status": "8 results"
+    }
+   ],
+   "target_source_files": 107,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "sorcery",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "NoamB/sorcery",
+   "lead_rank": 1,
+   "lead_count": 11,
+   "lead_provenance": [
+    "GitHub code search: \"SorceryController\" \"some_action_making_a_non_persisted_change_to_the_user\"; https://github.com/NoamB/sorcery/blob/4aaf38363eddf7a2982312ce68f0105dcc4ae8dc/spec/controllers/controller_activity_logging_spec.rb",
+    "GitHub code search: \"SorceryController\" \"some_action_making_a_non_persisted_change_to_the_user\"; https://github.com/NoamB/sorcery/blob/4aaf38363eddf7a2982312ce68f0105dcc4ae8dc/spec/rails_app/app/controllers/sorcery_controller.rb",
+    "GitHub code search: \"stub_all_oauth_requests\"; https://github.com/NoamB/sorcery/blob/4aaf38363eddf7a2982312ce68f0105dcc4ae8dc/spec/controllers/controller_oauth_spec.rb",
+    "GitHub code search: \"stub_all_oauth2_requests\" \"set_external_property\"; https://github.com/NoamB/sorcery/blob/4aaf38363eddf7a2982312ce68f0105dcc4ae8dc/spec/controllers/controller_oauth2_spec.rb",
+    "GitHub repositories search: sorcery in:name,description,readme; https://github.com/NoamB/sorcery"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.2986,
+   "upstream_matches": 67,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [],
+   "code_searches": [
+    {
+     "query": "\"stub_all_oauth2_requests\" \"set_external_property\"",
+     "status": "4 results"
+    },
+    {
+     "query": "\"stub_all_oauth_requests\"",
+     "status": "4 results"
+    },
+    {
+     "query": "\"SorceryController\" \"some_action_making_a_non_persisted_change_to_the_user\"",
+     "status": "8 results"
+    }
+   ],
+   "target_source_files": 107,
+   "target_token_warnings": 0
+  }
+ ]
+}
