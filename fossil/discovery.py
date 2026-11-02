@@ -42,6 +42,12 @@ def own_source(path: str | None) -> bool:
     return (not suffix or suffix in SOURCE) and context(path, "") not in {"vendored/external", "generated"}
 
 
+def authored(path: str) -> bool:
+    """Whether a file is written by people rather than generated or boilerplate tool configuration."""
+    parts = Path(path).parts
+    return not any(p.startswith(".") for p in parts) and not re.search(r"(?:\.lock|-lock\.json|-lock\.ya?ml|^go\.sum)$", parts[-1])
+
+
 CONFIRMING = {"code_overlap", "component_overlap", "corroborated_derivation", "corroborated_component", "shared_history", "declared_fork"}
 
 
@@ -118,7 +124,8 @@ def find_candidates(target: dict, inventory: dict, client, *, ai=None, exclude: 
     for key in ("parent", "source"):
         if meta.get(key):
             add(meta[key]["full_name"], "GitHub fork " + key + " metadata", 100)
-    for ref in inventory["references"]:
+    links = inventory["references"] + inventory.get("page_references", [])
+    for ref in links:
         relation = credits(ref)
         doc = bool(DOC.search(ref["path"]))
         # A credit inside vendored, test or generated files describes that bundled code's lineage, not the
@@ -129,7 +136,19 @@ def find_candidates(target: dict, inventory: dict, client, *, ai=None, exclude: 
         # comment pins the exact commit it took, which marks a deliberate record of borrowed code.
         snippet = 75 if ref.get("ref") else 40
         rank = 30 if relation and bundled else 90 if relation and doc else snippet if relation else 25 if doc else 10
-        add(ref["repository"] + ("@" + ref["ref"] if ref.get("ref") else ""), f"Target reference at {ref['path']}:{ref['line']}: {ref['text'][:220]}", rank)
+        where = f"GitHub Pages link {ref['page']}, read as {ref['repository']}, at" if ref.get("page") else "Target reference at"
+        add(ref["repository"] + ("@" + ref["ref"] if ref.get("ref") else ""), f"{where} {ref['path']}:{ref['line']}: {ref['text'][:220]}", rank)
+    # A repository the target links on many lines runs through its history: kt-paperclip's changelog and docs
+    # link thoughtbot/paperclip 25 times. Ranked as 25 separate plain mentions, it lost its place to single
+    # code-search hits. Bundled files describe their own lineage and do not count, nor do lockfiles and dotfile
+    # tool configs, which repeat a registry or style-guide URL on every line (Cargo.lock, .hound.yml).
+    mentions = {}
+    for ref in links:
+        if context(ref["path"], "") == "application" and authored(ref["path"]):
+            mentions.setdefault(ref["repository"].lower(), {"name": ref["repository"], "lines": set()})["lines"].add((ref["path"], ref["line"]))
+    for e in mentions.values():
+        if len(e["lines"]) >= 3:
+            add(e["name"], f"Target links it on {len(e['lines'])} lines", 45 + 2 * min(len(e["lines"]), 10))
     trail.append({"action": "target evidence", "detail": f"Extracted {len(ranked)} non-self repository references; these are leads, not ancestry findings"})
 
     def search(kind, query):
@@ -158,18 +177,20 @@ def find_candidates(target: dict, inventory: dict, client, *, ai=None, exclude: 
             break  # repeated 401/rate-limit requests are useless
     # Query names actually present in target acknowledgements, never a built-in mapping.
     relation_names = []
-    for ref in inventory["references"]:
+    for ref in links:
         if credits(ref):
             n = ref["repository"].split("/")[-1]
             if n not in relation_names:
                 relation_names.append(n)
     for name in relation_names[:2]:
         search("repositories", name + " in:name")
-    # README title gives a fallback even for local folders/archives without remotes.
+    # README title gives a fallback even for local folders/archives without remotes. Without one, the name the
+    # manifest declares beats the folder name, which for a download or checkout is often arbitrary ("subject").
     title = next((line.lstrip("# ").strip() for f in inventory["files"] if re.search(r"(^|/)readme", f["path"], re.I)
                   for line in f["text"].splitlines()[:15] if line.startswith("# ")), "")
     terms = re.findall(r"[A-Za-z][A-Za-z0-9_-]{2,}", title)
-    query = " ".join(terms[:3]) or (target.get("repository", "").split("/")[-1] or Path(target["input"]).stem)
+    query = (" ".join(terms[:3]) or inventory.get("package_name") or target.get("repository", "").split("/")[-1]
+             or Path(target["input"]).stem)
     if query:
         search("repositories", query + " in:name,description,readme")
     if ai:

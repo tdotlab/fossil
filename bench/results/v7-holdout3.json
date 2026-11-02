@@ -1,0 +1,961 @@
+{
+ "tag": "v7",
+ "scored_at": "2026-11-02T14:44:37.135895+00:00",
+ "rows": [
+  {
+   "id": "pdfminer.six",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "euske/pdfminer",
+   "lead_rank": 19,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub repositories search: pdfminer.six in:name,description,readme; https://github.com/euske/pdfminer",
+    "GitHub Pages link https://euske.github.io/pdfminer, read as euske/pdfminer, at README.md:17:  * Webpage: https://euske.github.io/pdfminer/"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "patrickdw123/paranoidf",
+     "verdict": "code_overlap",
+     "coverage": 0.0611,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "hazyresearch/treestructure",
+     "verdict": "code_overlap",
+     "coverage": 0.0609,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "jerrychan807/wspih",
+     "verdict": "code_overlap",
+     "coverage": 0.0318,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"rijndaelSetupEncrypt\" \"rijndaelSetupDecrypt\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"FontMetricsDB\" \"Type1FontHeaderParser\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"PDFNoValidXRef\" \"PDFNoOutlines\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 40,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "pdfminer.six",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "euske/pdfminer",
+   "lead_rank": 18,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub repositories search: pdfminer.six in:name,description,readme; https://github.com/euske/pdfminer"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "patrickdw123/paranoidf",
+     "verdict": "code_overlap",
+     "coverage": 0.0609,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "hazyresearch/treestructure",
+     "verdict": "code_overlap",
+     "coverage": 0.0607,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "jerrychan807/wspih",
+     "verdict": "code_overlap",
+     "coverage": 0.0317,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"rijndaelSetupEncrypt\" \"rijndaelSetupDecrypt\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"FontMetricsDB\" \"Type1FontHeaderParser\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"PDFNoValidXRef\" \"PDFNoOutlines\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 40,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "dj-rest-auth",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "Tivix/django-rest-auth",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"SocialAccountSerializer\" \"SocialLoginSerializer\"; https://github.com/Tivix/django-rest-auth/blob/cdd04aa9be7ad3da6b417380ee14b3ff4d5459ba/rest_auth/registration/serializers.py",
+    "GitHub code search: \"process_login\" \"get_response_serializer\"; https://github.com/Tivix/django-rest-auth/blob/cdd04aa9be7ad3da6b417380ee14b3ff4d5459ba/rest_auth/views.py",
+    "GitHub code search: \"LoginSerializer\" \"_validate_email\"; https://github.com/Tivix/django-rest-auth/blob/cdd04aa9be7ad3da6b417380ee14b3ff4d5459ba/rest_auth/serializers.py",
+    "GitHub repositories search: Dj-Rest-Auth in:name,description,readme; https://github.com/Tivix/django-rest-auth"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.5504,
+   "upstream_matches": 20,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "sukgu/aut-reports",
+     "verdict": "code_overlap",
+     "coverage": 0.2936,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "pclumson/dj-apis-allauth",
+     "verdict": "code_overlap",
+     "coverage": 0.1031,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"LoginSerializer\" \"_validate_email\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"process_login\" \"get_response_serializer\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"SocialAccountSerializer\" \"SocialLoginSerializer\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 29,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "dj-rest-auth",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "Tivix/django-rest-auth",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"SocialAccountSerializer\" \"SocialLoginSerializer\"; https://github.com/Tivix/django-rest-auth/blob/cdd04aa9be7ad3da6b417380ee14b3ff4d5459ba/rest_auth/registration/serializers.py",
+    "GitHub code search: \"process_login\" \"get_response_serializer\"; https://github.com/Tivix/django-rest-auth/blob/cdd04aa9be7ad3da6b417380ee14b3ff4d5459ba/rest_auth/views.py",
+    "GitHub code search: \"LoginSerializer\" \"_validate_email\"; https://github.com/Tivix/django-rest-auth/blob/cdd04aa9be7ad3da6b417380ee14b3ff4d5459ba/rest_auth/serializers.py",
+    "GitHub repositories search: dj-rest-auth in:name,description,readme; https://github.com/Tivix/django-rest-auth"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.5507,
+   "upstream_matches": 20,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "sukgu/aut-reports",
+     "verdict": "code_overlap",
+     "coverage": 0.2938,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "pclumson/dj-apis-allauth",
+     "verdict": "code_overlap",
+     "coverage": 0.1032,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "modularhistory/modularhistory",
+     "verdict": "code_overlap",
+     "coverage": 0.0114,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"LoginSerializer\" \"_validate_email\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"process_login\" \"get_response_serializer\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"SocialAccountSerializer\" \"SocialLoginSerializer\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 28,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "markdown-it",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "jonschlinkert/remarkable",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"heading_open\" \"heading_close\"; https://github.com/jonschlinkert/remarkable/blob/7c5e433620c967618eb38cdb57360734274061c4/lib/rules.js",
+    "GitHub code search: \"blockquote_open\" \"blockquote_close\"; https://github.com/jonschlinkert/remarkable/blob/7c5e433620c967618eb38cdb57360734274061c4/lib/rules.js",
+    "GitHub code search: \"setOptionClass\" \"setResultView\"; https://github.com/jonschlinkert/remarkable/blob/7c5e433620c967618eb38cdb57360734274061c4/demo/assets/index.js"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.495,
+   "upstream_matches": 102,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "dirk1983/deepseek",
+     "verdict": "code_overlap",
+     "coverage": 0.1914,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "cnodejs/egg-cnode",
+     "verdict": "code_overlap",
+     "coverage": 0.1849,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"setOptionClass\" \"setResultView\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"blockquote_open\" \"blockquote_close\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"heading_open\" \"heading_close\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 128,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "markdown-it",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "jonschlinkert/remarkable",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"heading_open\" \"heading_close\"; https://github.com/jonschlinkert/remarkable/blob/7c5e433620c967618eb38cdb57360734274061c4/lib/rules.js",
+    "GitHub code search: \"blockquote_open\" \"blockquote_close\"; https://github.com/jonschlinkert/remarkable/blob/7c5e433620c967618eb38cdb57360734274061c4/lib/rules.js",
+    "GitHub code search: \"setOptionClass\" \"setResultView\"; https://github.com/jonschlinkert/remarkable/blob/7c5e433620c967618eb38cdb57360734274061c4/demo/assets/index.js"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.495,
+   "upstream_matches": 102,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "dirk1983/deepseek",
+     "verdict": "code_overlap",
+     "coverage": 0.1914,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "cnodejs/egg-cnode",
+     "verdict": "code_overlap",
+     "coverage": 0.1849,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"setOptionClass\" \"setResultView\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"blockquote_open\" \"blockquote_close\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"heading_open\" \"heading_close\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 128,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "opentofu",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "hashicorp/terraform",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"getProviders\" \"backendConfigOverrideBody\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/command/init.go",
+    "GitHub code search: \"ConfigSchema\" \"PrepareConfig\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/backend/local/backend.go",
+    "GitHub code search: \"ConfigSchema\" \"PrepareConfig\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/backend/pluggable/pluggable.go",
+    "GitHub code search: \"ConfigSchema\" \"PrepareConfig\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/backend/remote/backend.go",
+    "GitHub code search: \"ConfigSchema\" \"PrepareConfig\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/cloud/backend.go",
+    "Target links it on 10 lines",
+    "GitHub code search: \"NewMockClient\" \"newMockApplies\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/cloud/tfe_client_mock.go",
+    "Target reference at CHANGELOG.md:14: * config: OpenTF can now track some additional detail about values that won't be known until the apply step, such as the range of possible lengths for a collection or whether an unknown value can possibly be null. When t"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.2058,
+   "upstream_matches": 134,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "augur-ai/mantis",
+     "verdict": "code_overlap",
+     "coverage": 0.3817,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "intentius/choudoufu",
+     "verdict": "code_overlap",
+     "coverage": 0.2187,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "apparentlymart/terraform",
+     "verdict": "code_overlap",
+     "coverage": 0.2609,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"NewMockClient\" \"newMockApplies\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ConfigSchema\" \"PrepareConfig\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"getProviders\" \"backendConfigOverrideBody\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 235,
+   "target_token_warnings": 1126
+  },
+  {
+   "id": "opentofu",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "hashicorp/terraform",
+   "lead_rank": 1,
+   "lead_count": 22,
+   "lead_provenance": [
+    "GitHub code search: \"getProviders\" \"backendConfigOverrideBody\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/command/init.go",
+    "GitHub code search: \"ConfigSchema\" \"PrepareConfig\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/backend/local/backend.go",
+    "GitHub code search: \"ConfigSchema\" \"PrepareConfig\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/backend/pluggable/pluggable.go",
+    "GitHub code search: \"ConfigSchema\" \"PrepareConfig\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/backend/remote/backend.go",
+    "GitHub code search: \"ConfigSchema\" \"PrepareConfig\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/cloud/backend.go",
+    "GitHub code search: \"NewMockClient\" \"newMockApplies\"; https://github.com/hashicorp/terraform/blob/a48fc90914ea12217e1d6ece085383f17715aa97/internal/cloud/tfe_client_mock.go"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.2049,
+   "upstream_matches": 134,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "augur-ai/mantis",
+     "verdict": "code_overlap",
+     "coverage": 0.3788,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "intentius/choudoufu",
+     "verdict": "code_overlap",
+     "coverage": 0.2186,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "apparentlymart/terraform",
+     "verdict": "code_overlap",
+     "coverage": 0.2606,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"NewMockClient\" \"newMockApplies\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ConfigSchema\" \"PrepareConfig\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"getProviders\" \"backendConfigOverrideBody\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 236,
+   "target_token_warnings": 1115
+  },
+  {
+   "id": "yaml-rust2",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "chyh1990/yaml-rust",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Target reference at README.md:4: This work is based on [`yaml-rust`](https://github.com/chyh1990/yaml-rust) with",
+    "GitHub code search: \"insert_new_node\" \"load_from_str\"; https://github.com/chyh1990/yaml-rust/blob/da52a68615f2ecdd6b7e4567019f280c433c1521/src/yaml.rs",
+    "GitHub code search: \"empty_scalar\" \"empty_scalar_with_anchor\"; https://github.com/chyh1990/yaml-rust/blob/da52a68615f2ecdd6b7e4567019f280c433c1521/src/parser.rs",
+    "GitHub repositories search: yaml-rust in:name; https://github.com/chyh1990/yaml-rust",
+    "Target reference at src/yaml.rs:57: // See: https://github.com/chyh1990/yaml-rust/issues/51",
+    "Target reference at tests/basic.rs:155:     // https://github.com/chyh1990/yaml-rust/issues/27",
+    "Target reference at tests/basic.rs:228:     // See: https://github.com/chyh1990/yaml-rust/issues/23",
+    "Target reference at tests/basic.rs:235:     // See: https://github.com/chyh1990/yaml-rust/issues/65"
+   ],
+   "upstream_verdict": "corroborated_derivation",
+   "upstream_coverage": 0.1159,
+   "upstream_matches": 21,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "saphyr-rs/saphyr",
+     "verdict": "code_overlap",
+     "coverage": 0.004,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "nicenenerd/byml-rust",
+     "verdict": "code_overlap",
+     "coverage": 0.0171,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "m8rex/yaml-rust-formatter",
+     "verdict": "code_overlap",
+     "coverage": 0.0492,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"TScalarStyle\" \"is_yaml_non_break\"",
+     "status": "8 results"
+    },
+    {
+     "query": "\"empty_scalar\" \"empty_scalar_with_anchor\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"insert_new_node\" \"load_from_str\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 16,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "yaml-rust2",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "chyh1990/yaml-rust",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"insert_new_node\" \"load_from_str\"; https://github.com/chyh1990/yaml-rust/blob/da52a68615f2ecdd6b7e4567019f280c433c1521/src/yaml.rs",
+    "GitHub code search: \"empty_scalar\" \"empty_scalar_with_anchor\"; https://github.com/chyh1990/yaml-rust/blob/da52a68615f2ecdd6b7e4567019f280c433c1521/src/parser.rs"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.1159,
+   "upstream_matches": 21,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "saphyr-rs/saphyr",
+     "verdict": "code_overlap",
+     "coverage": 0.004,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "nicenenerd/byml-rust",
+     "verdict": "code_overlap",
+     "coverage": 0.0171,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "m8rex/yaml-rust-formatter",
+     "verdict": "code_overlap",
+     "coverage": 0.0492,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"TScalarStyle\" \"is_yaml_non_break\"",
+     "status": "8 results"
+    },
+    {
+     "query": "\"empty_scalar\" \"empty_scalar_with_anchor\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"insert_new_node\" \"load_from_str\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 16,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "zlib-ng",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "madler/zlib",
+   "lead_rank": null,
+   "lead_count": 24,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "yasushi-saito/zlibng",
+     "verdict": "code_overlap",
+     "coverage": 0.0534,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "dwelch67/raspberrypi",
+     "verdict": "code_overlap",
+     "coverage": 0.0392,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"quick_send_bits\" \"static_emit_ptr\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"insert_string_sse\" \"insert_string_c\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"inflateResetKeep\" \"inflateReset\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 37,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "zlib-ng",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "madler/zlib",
+   "lead_rank": null,
+   "lead_count": 24,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "yasushi-saito/zlibng",
+     "verdict": "code_overlap",
+     "coverage": 0.0534,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "dwelch67/raspberrypi",
+     "verdict": "code_overlap",
+     "coverage": 0.0392,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"quick_send_bits\" \"static_emit_ptr\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"insert_string_sse\" \"insert_string_c\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"inflateResetKeep\" \"inflateReset\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 37,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "htop",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "hishamhm/htop",
+   "lead_rank": null,
+   "lead_count": 24,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "avafinger/htop_2.2.2",
+     "verdict": "code_overlap",
+     "coverage": 0.5017,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "avafinger/htop-2.1.1_enhanced-version",
+     "verdict": "code_overlap",
+     "coverage": 0.4357,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "avafinger/htop_2.2.2-amd64",
+     "verdict": "code_overlap",
+     "coverage": 0.504,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"sortTtyDrivers\" \"LinuxProcessList_initTtyDrivers\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"CRT_handleSIGTERM\" \"CRT_dropPrivileges\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"Action_pickFromVector\" \"Action_runSetup\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 174,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "htop",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "hishamhm/htop",
+   "lead_rank": null,
+   "lead_count": 24,
+   "lead_provenance": [],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "avafinger/htop_2.2.2",
+     "verdict": "code_overlap",
+     "coverage": 0.4993,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "avafinger/htop-2.1.1_enhanced-version",
+     "verdict": "code_overlap",
+     "coverage": 0.4337,
+     "relation": "unlabelled"
+    },
+    {
+     "repository": "avafinger/htop_2.2.2-amd64",
+     "verdict": "code_overlap",
+     "coverage": 0.5016,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"sortTtyDrivers\" \"LinuxProcessList_initTtyDrivers\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"CRT_handleSIGTERM\" \"CRT_dropPrivileges\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"Action_pickFromVector\" \"Action_runSetup\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 174,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "laminas-diactoros",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "zendframework/zend-diactoros",
+   "lead_rank": 3,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Target links it on 147 lines",
+    "GitHub repositories search: laminas-diactoros in:name,description,readme; https://github.com/zendframework/zend-diactoros",
+    "Target reference at CHANGELOG.md:101: - [zendframework/zend-diactoros#378](https://github.com/zendframework/zend-diactoros/pull/378) updates the `UploadedFile` class to extend `SplFileInfo`, allowing developers to make use of those features in their applicat",
+    "Target reference at CHANGELOG.md:1024: - [zendframework/zend-diactoros#241](https://github.com/zendframework/zend-diactoros/pull/241) changes the",
+    "Target reference at CHANGELOG.md:1039: - [zendframework/zend-diactoros#161](https://github.com/zendframework/zend-diactoros/pull/161) adds",
+    "Target reference at CHANGELOG.md:1043: - [zendframework/zend-diactoros#234](https://github.com/zendframework/zend-diactoros/pull/234) fixes a",
+    "Target reference at CHANGELOG.md:1063: - [zendframework/zend-diactoros#226](https://github.com/zendframework/zend-diactoros/pull/226) fixed an",
+    "Target reference at CHANGELOG.md:1084: - [zendframework/zend-diactoros#223](https://github.com/zendframework/zend-diactoros/issues/223)"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.9306,
+   "upstream_matches": 35,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [],
+   "code_searches": [
+    {
+     "query": "\"getAuthority\" \"withUserInfo\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"MessageTrait\" \"getProtocolVersion\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"marshalUriFromSapi\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 59,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "laminas-diactoros",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "zendframework/zend-diactoros",
+   "lead_rank": 6,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Named by confirmed candidate marqitos/php-kansas in 6 file(s) it shares with the target; e.g. src/Http/PhpInputStream.php:3:  * @see       https://github.com/zendframework/zend-diactoros for the canonical source repository",
+    "GitHub repositories search: laminas-diactoros in:name,description,readme; https://github.com/zendframework/zend-diactoros"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "marqitos/php-kansas",
+     "verdict": "code_overlap",
+     "coverage": 0.1214,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"getAuthority\" \"withUserInfo\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"MessageTrait\" \"getProtocolVersion\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"marshalUriFromSapi\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 59,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "kt-paperclip",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "thoughtbot/paperclip",
+   "lead_rank": 7,
+   "lead_count": 24,
+   "lead_provenance": [
+    "Target links it on 17 lines",
+    "Target reference at README.md:791: For more on this feature, read [the author's own explanation](https://github.com/thoughtbot/paperclip/pull/416)",
+    "Target reference at .github/issue_template.md:3: Paperclip is currently undergoing [deprecation in favor of ActiveStorage](https://github.com/thoughtbot/paperclip/blob/master/MIGRATING.md). Maintainers of this repository will no longer be tending to new issues. We're l",
+    "Target reference at NEWS:119:   https://github.com/thoughtbot/paperclip/pull/1903",
+    "Target reference at NEWS:129: https://github.com/thoughtbot/paperclip/blob/v4.3/NEWS",
+    "Target reference at NEWS:20: * Improvement: Depend only on `aws-sdk-s3` instead of `aws-sdk` (https://github.com/thoughtbot/paperclip/pull/2481)",
+    "Target reference at NEWS:24: * Improvement: Use `FactoryBot` instead of `FactoryGirl` (https://github.com/thoughtbot/paperclip/pull/2501)",
+    "Target reference at NEWS:25: * Improvement: README updates (https://github.com/thoughtbot/paperclip/pull/2411, https://github.com/thoughtbot/paperclip/pull/2433, https://github.com/thoughtbot/paperclip/pull/2374, https://github.com/thoughtbot/paperc"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.2724,
+   "upstream_matches": 110,
+   "upstream_relatives_in_leads": [
+    "kreeti/kt-paperclip"
+   ],
+   "other_confirmed": [
+    {
+     "repository": "wearepush/paperclip",
+     "verdict": "code_overlap",
+     "coverage": 0.1921,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"do_before_avatar\" \"do_after_avatar\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"aws2_add_region\" \"original_filename\"",
+     "status": "7 results"
+    },
+    {
+     "query": "\"s3_files_for\" \"s3_headers_for\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 141,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "kt-paperclip",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "thoughtbot/paperclip",
+   "lead_rank": 13,
+   "lead_count": 22,
+   "lead_provenance": [
+    "GitHub repositories search: kt-paperclip in:name,description,readme; https://github.com/thoughtbot/paperclip"
+   ],
+   "upstream_verdict": null,
+   "upstream_coverage": null,
+   "upstream_matches": null,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "wearepush/paperclip",
+     "verdict": "code_overlap",
+     "coverage": 0.1925,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"do_before_avatar\" \"do_after_avatar\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"aws2_add_region\" \"original_filename\"",
+     "status": "7 results"
+    },
+    {
+     "query": "\"s3_files_for\" \"s3_headers_for\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 141,
+   "target_token_warnings": 0
+  },
+  {
+   "id": "jellyfin",
+   "kind": "project",
+   "condition": "intact",
+   "upstream": "MediaBrowser/Emby",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"ApplicationHost\" \"CertificateInfo\"; https://github.com/MediaBrowser/Emby/blob/1d7c2ab4bfebdae31f89fdaabd3b68782ccf495a/Emby.Server.Implementations/ApplicationHost.cs",
+    "GitHub code search: \"SqliteItemRepository\"; https://github.com/MediaBrowser/Emby/blob/1d7c2ab4bfebdae31f89fdaabd3b68782ccf495a/Emby.Server.Implementations/Data/SqliteItemRepository.cs",
+    "Target reference at Nuget/MediaBrowser.Common.nuspec:9:         <projectUrl>https://github.com/MediaBrowser/Emby</projectUrl>",
+    "Target reference at Nuget/MediaBrowser.Server.Core.nuspec:9:         <projectUrl>https://github.com/MediaBrowser/Emby</projectUrl>"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.3659,
+   "upstream_matches": 93,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "jaja123456789/jellyfin-rkmpp",
+     "verdict": "code_overlap",
+     "coverage": 0.1272,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"SqliteItemRepository\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ApplicationHost\" \"CertificateInfo\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ControlHandler\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 236,
+   "target_token_warnings": 1561
+  },
+  {
+   "id": "jellyfin",
+   "kind": "project",
+   "condition": "stripped",
+   "upstream": "MediaBrowser/Emby",
+   "lead_rank": 1,
+   "lead_count": 24,
+   "lead_provenance": [
+    "GitHub code search: \"ApplicationHost\" \"CertificateInfo\"; https://github.com/MediaBrowser/Emby/blob/1d7c2ab4bfebdae31f89fdaabd3b68782ccf495a/Emby.Server.Implementations/ApplicationHost.cs",
+    "GitHub code search: \"SqliteItemRepository\"; https://github.com/MediaBrowser/Emby/blob/1d7c2ab4bfebdae31f89fdaabd3b68782ccf495a/Emby.Server.Implementations/Data/SqliteItemRepository.cs"
+   ],
+   "upstream_verdict": "code_overlap",
+   "upstream_coverage": 0.361,
+   "upstream_matches": 93,
+   "upstream_relatives_in_leads": [],
+   "other_confirmed": [
+    {
+     "repository": "jaja123456789/jellyfin-rkmpp",
+     "verdict": "code_overlap",
+     "coverage": 0.1266,
+     "relation": "unlabelled"
+    }
+   ],
+   "code_searches": [
+    {
+     "query": "\"SqliteItemRepository\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ApplicationHost\" \"CertificateInfo\"",
+     "status": "10 results"
+    },
+    {
+     "query": "\"ControlHandler\"",
+     "status": "10 results"
+    }
+   ],
+   "target_source_files": 239,
+   "target_token_warnings": 1553
+  }
+ ]
+}

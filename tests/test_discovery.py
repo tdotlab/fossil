@@ -69,6 +69,49 @@ class DiscoveryTests(unittest.TestCase):
         self.assertEqual(leads[:2], ["original/strata", "author/snippet"])
         self.assertTrue(all(leads.index(f"third/party{i}") > 1 for i in range(4)))
 
+    def test_repository_mentioned_on_many_lines_outranks_single_code_search_hits(self):
+        from fossil.discovery import find_candidates
+        p = self.root / "target"
+        (p / "deps" / "lib").mkdir(parents=True)
+        (p / "engine.py").write_text(CODE)
+        (p / "NEWS").write_text("".join(f"* Fix crash (https://github.com/thoughtbot/paperclip/issues/{n}, https://github.com/thoughtbot/paperclip/pull/{n})\n" for n in range(12))
+                                + "* Uses https://github.com/rails/rails\n* Tested with https://github.com/rails/rails\n")
+        (p / "deps" / "lib" / "notes.txt").write_text("".join(f"https://github.com/bundled/dep/issues/{n}\n" for n in range(12)))
+        (p / "Cargo.lock").write_text("".join(f'source = "registry+https://github.com/rust-lang/crates.io-index"\n# {n}\n' for n in range(12)))
+        (p / ".hound.yml").write_text("".join(f"  StyleGuide: https://github.com/bbatsov/ruby-style-guide#rule-{n}\n" for n in range(12)))
+        inv = inspect(p)
+        class SearchService:
+            def get(self, route):
+                if route.startswith("/search/code"):
+                    return {"items": [{"repository": {"full_name": f"hit/repo{i}"}} for i in range(5)]}
+                return {"items": []}
+        leads = find_candidates({"input": "target", "metadata": {}}, inv, SearchService())[0]
+        order = list(leads)
+        self.assertEqual(order[0], "thoughtbot/paperclip")
+        self.assertTrue(any("12 lines" in r for r in leads["thoughtbot/paperclip"]))
+        self.assertGreater(order.index("rails/rails"), order.index("hit/repo4"))
+        for noise in ("bundled/dep", "rust-lang/crates.io-index", "bbatsov/ruby-style-guide"):
+            self.assertGreater(order.index(noise), order.index("hit/repo4"), noise)
+
+    def test_github_pages_links_become_leads_but_not_documentary_references(self):
+        from fossil.discovery import find_candidates
+        p = self.root / "target"
+        p.mkdir()
+        (p / "engine.py").write_text(CODE)
+        (p / "README.md").write_text("# PDFMiner.six\n\nPDFMiner.six is a fork of PDFMiner (https://euske.github.io/pdfminer/index.html).\n"
+                                     "Site: https://someone.github.io/ and https://someone.github.io/index.html\n")
+        inv = inspect(p)
+        self.assertEqual(inv["references"], [])
+        self.assertEqual([r["repository"] for r in inv["page_references"]], ["euske/pdfminer"])
+        class SearchService:
+            def get(self, route):
+                if route.startswith("/search/code"):
+                    return {"items": [{"repository": {"full_name": f"hit/repo{i}"}} for i in range(5)]}
+                return {"items": []}
+        leads = find_candidates({"input": "target", "metadata": {}}, inv, SearchService())[0]
+        self.assertEqual(next(iter(leads)), "euske/pdfminer")
+        self.assertTrue(any("GitHub Pages" in r for r in leads["euske/pdfminer"]))
+
     def test_search_terms_pair_definitions_from_core_files_not_imports_or_build_scripts(self):
         p = self.root / "target"
         (p / "scripts").mkdir(parents=True)
@@ -88,6 +131,60 @@ class DiscoveryTests(unittest.TestCase):
         self.assertIn(["createClusterNode", "clusterAddNode"], inv["search_terms"])
         self.assertIn(["get_window_manager_theme"], inv["search_terms"])
         self.assertTrue(next(f for f in inv["files"] if f["path"] == "fetchtool")["source"])
+
+    def test_php_function_imports_are_not_definitions(self):
+        p = self.root / "target"
+        p.mkdir()
+        (p / "Factory.php").write_text("<?php\nnamespace Strata;\n\nuse function array_key_exists;\nuse function\tis_callable_layer;\n\n"
+                                       "final class ServerRequestFactory\n{\n    public static function normalizeServerParams() {}\n}\n")
+        terms = inspect(p)["search_terms"]
+        self.assertEqual(terms, [["ServerRequestFactory", "normalizeServerParams"]])
+
+    def test_package_name_ignores_subfolder_manifests_and_survives_blanked_json(self):
+        p = self.root / "target"
+        (p / "website").mkdir(parents=True)
+        (p / "website" / "package.json").write_text('{"name": "docs-preview"}')
+        self.assertEqual(inspect(p)["package_name"], "")
+        (p / "package.json").write_text('{\n  "name": "markdown-it",\n  "version": "4.0.0",\n\n}\n')
+        (p / "pyproject.toml").write_text('[project]\nname = "strata"\n')
+        self.assertEqual(inspect(p)["package_name"], "strata")
+        (p / "pyproject.toml").unlink()
+        self.assertEqual(inspect(p)["package_name"], "markdown-it")
+
+    def test_package_name_comes_from_the_root_manifest(self):
+        cases = {
+            "pyproject.toml": ('[project]\nname = "strata-tools"\n', "strata-tools"),
+            "setup.py": ("from setuptools import setup\nsetup(\n    name='pdfminer.six',\n)\n", "pdfminer.six"),
+            "Cargo.toml": ('[package]\nname = "yaml-rust2"\nversion = "0.1.0"\n', "yaml-rust2"),
+            "package.json": ('{"name": "@colors/colors", "version": "1.5.0"}', "colors"),
+            "composer.json": ('{"name": "laminas/laminas-diactoros"}', "laminas-diactoros"),
+            "kt-paperclip.gemspec": ("Gem::Specification.new do |s|\n  s.name = \"kt-paperclip\"\nend\n", "kt-paperclip"),
+            "go.mod": ("module github.com/gofrs/uuid/v5\n\ngo 1.19\n", "uuid"),
+        }
+        for manifest, (text, expected) in cases.items():
+            p = self.root / manifest.replace(".", "_")
+            (p / "vendor" / "dep").mkdir(parents=True)
+            (p / manifest).write_text(text)
+            (p / "vendor" / "dep" / "package.json").write_text('{"name": "bundled-dependency"}')
+            self.assertEqual(inspect(p)["package_name"], expected, manifest)
+
+    def test_without_a_readme_the_repository_search_uses_the_package_name_not_the_folder(self):
+        from fossil.discovery import find_candidates
+        p = self.root / "subject"
+        p.mkdir()
+        (p / "engine.py").write_text(CODE)
+        (p / "setup.py").write_text("setup(name='strata-tools')\n")
+        inv = inspect(p)
+        class SearchService:
+            def __init__(self): self.queries = []
+            def get(self, route):
+                self.queries.append(route)
+                return {"items": []}
+        service = SearchService()
+        find_candidates({"input": str(p), "metadata": {}}, inv, service)
+        repo_queries = [q for q in service.queries if q.startswith("/search/repositories")]
+        self.assertTrue(any("strata-tools" in q for q in repo_queries))
+        self.assertFalse(any("subject" in q for q in repo_queries))
 
     def test_vendored_code_that_sorts_first_cannot_starve_application_token_budget(self):
         p = self.root / "target"

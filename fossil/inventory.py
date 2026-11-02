@@ -19,6 +19,11 @@ MAX_TOTAL_TOKENS = 200_000
 SOURCE = {".py", ".js", ".ts", ".tsx", ".jsx", ".c", ".h", ".cpp", ".hpp", ".cc", ".cs", ".go", ".rs", ".java", ".rb", ".php", ".swift", ".kt", ".scala", ".lua", ".sh", ".ex", ".exs", ".m", ".vue", ".svelte"}
 TOKEN = re.compile(r'(?P<comment>/\*[\s\S]*?\*/|//[^\n]*|\#[^\n]*)|(?P<string>"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\')|(?P<token>[A-Za-z_$][\w$]*|\d+(?:\.\d+)?|[^\s])')
 URL = re.compile(r"https?://github\.com/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)")
+# A project site at owner.github.io/repo is usually built from owner/repo. That is a guess, so these links
+# are kept apart from references: they steer discovery but never count as documentary evidence.
+PAGES = re.compile(r"https?://([A-Za-z0-9-]+)\.github\.io/([A-Za-z0-9_.-]*)")
+LINK = re.compile(URL.pattern + "|" + PAGES.pattern)
+WEB_FILE = re.compile(r"\.(?:html?|php|xml|json|css|js|png|jpe?g|gif|svg|pdf|txt|md)$", re.I)
 
 
 def tokenize(text: str, *, python: bool = False) -> tuple[list[str], list[int]]:
@@ -103,8 +108,65 @@ def dependencies(path: str, text: str) -> list[str]:
     return []
 
 
+MANIFESTS = ("pyproject.toml", "setup.cfg", "setup.py", "Cargo.toml", "package.json", "composer.json", ".gemspec", "go.mod")
+
+
+def manifest_name(name: str, text: str) -> str:
+    """The package name a manifest declares, or "" when it declares none."""
+    try:
+        if name in {"pyproject.toml", "Cargo.toml"}:
+            import tomllib
+            data = tomllib.loads(text)
+            found = data.get("project", {}).get("name") or data.get("tool", {}).get("poetry", {}).get("name") or data.get("package", {}).get("name")
+        elif name in {"package.json", "composer.json"}:
+            try:
+                found = json.loads(text).get("name")
+            except ValueError:  # hand-edited or partly blanked manifests: the first name key still names the package
+                m = re.search(r'"name"\s*:\s*"([^"]+)"', text)
+                found = m and m.group(1)
+        elif name == "go.mod":
+            m = re.search(r"^module\s+(\S+)", text, re.M)
+            # The module path ends in the package; a /vN suffix is only a major version.
+            found = m and [p for p in m.group(1).split("/") if not re.fullmatch(r"v\d+", p)][-1]
+        else:
+            pattern = {"setup.cfg": r"(?ms)^\[metadata\].*?^name\s*=\s*([\w.-]+)", "setup.py": r"\bname\s*=\s*['\"]([\w.-]+)['\"]"}.get(name, r"\.name\s*=\s*['\"]([\w.-]+)['\"]")
+            m = re.search(pattern, text)
+            found = m and m.group(1)
+    except (ValueError, TypeError, AttributeError, IndexError):
+        return ""
+    # Scoped npm and Composer names are vendor/package; the vendor is not the project's name.
+    return found.rsplit("/", 1)[-1] if isinstance(found, str) else ""
+
+
+def package_name(files: list[dict]) -> str:
+    """The name a root manifest declares: a search hint that survives a missing README.
+
+    Only the root counts. Manifests in subfolders name docs sites, examples and sub-packages
+    (opentofu's website/package.json), not the project.
+    """
+    root = {(".gemspec" if f["path"].endswith(".gemspec") else f["path"]): f["text"] for f in files if "/" not in f["path"]}
+    # Language manifests first: a Python or Rust project's package.json usually only drives tooling.
+    return next((found for kind in MANIFESTS if kind in root and (found := manifest_name(kind, root[kind]))), "")
+
+
+def statement(text_lines: list[str], number: int, m: re.Match, previous_link_end: int) -> str:
+    """The sentence around a link, or the attribution text standing just above a link on its own line."""
+    line = text_lines[number - 1]
+    start = max(line.rfind(". ", 0, m.start()) + 2, line.rfind("; ", 0, m.start()) + 2, previous_link_end)
+    if start == 1:
+        start = 0
+    end = line.find(". ", m.end())
+    found = line[start:end if end >= 0 else len(line)]
+    if not re.search(r"\b(?:derived|fork|based|inspired|original)\b", found, re.I) and line[:m.start()].strip() == "":
+        before = " ".join(text_lines[max(0, number-3):number-1])
+        # Only contiguous attribution text immediately above a standalone link.
+        if before.strip() and re.search(r"(?:derived from|fork of|based on|inspired by)\s*$", before, re.I):
+            found = before + " " + found
+    return found[:700]
+
+
 def inspect(root: Path) -> dict:
-    files, refs, deps, licenses, warnings = [], [], set(), [], []
+    files, refs, pages, deps, licenses, warnings = [], [], [], set(), [], []
     total = 0
     paths = []
     for base, dirs, names in os.walk(root, followlinks=False):
@@ -141,24 +203,22 @@ def inspect(root: Path) -> dict:
             for m in URL.finditer(line):
                 name = m.group(1).rstrip(".,;)").removesuffix(".git")
                 previous_link_end = max((x.end() for x in URL.finditer(line[:m.start()])), default=0)
-                start = max(line.rfind(". ", 0, m.start()) + 2, line.rfind("; ", 0, m.start()) + 2, previous_link_end)
-                if start == 1:
-                    start = 0
-                end = line.find(". ", m.end())
-                statement = line[start:end if end >= 0 else len(line)]
-                if not re.search(r"\b(?:derived|fork|based|inspired|original)\b", statement, re.I) and line[:m.start()].strip() == "":
-                    before = " ".join(text_lines[max(0, number-3):number-1])
-                    # Only contiguous attribution text immediately above a standalone link.
-                    if before.strip() and re.search(r"(?:derived from|fork of|based on|inspired by)\s*$", before, re.I):
-                        statement = before + " " + statement
                 commit_match = re.match(r"/commit/([0-9a-fA-F]{40})", line[m.end():])
-                refs.append({"repository": name, "path": rel, "line": number, "text": line[:700], "statement": statement[:700], "ref": commit_match.group(1) if commit_match else None})
+                refs.append({"repository": name, "path": rel, "line": number, "text": line[:700], "statement": statement(text_lines, number, m, previous_link_end),
+                             "ref": commit_match.group(1) if commit_match else None})
+            for m in PAGES.finditer(line):
+                owner, site = m.group(1), m.group(2).rstrip(".,;)")
+                if site and not WEB_FILE.search(site):
+                    previous_link_end = max((x.end() for x in LINK.finditer(line[:m.start()])), default=0)
+                    pages.append({"repository": owner + "/" + site, "path": rel, "line": number, "text": line[:700],
+                                  "statement": statement(text_lines, number, m, previous_link_end), "ref": None, "page": m.group(0)})
     budget(files, warnings)
     manifest = "\n".join(f["path"] + ":" + f["sha256"] for f in files)
     groups = search_terms(files)
     return {"digest": hashlib.sha256(manifest.encode()).hexdigest(), "files": files, "references": refs,
             "dependencies": sorted(deps), "licenses": licenses, "warnings": warnings,
-            "symbols": [s for group in groups for s in group][:12], "search_terms": groups,
+            "symbols": [s for group in groups for s in group][:12], "search_terms": groups, "package_name": package_name(files),
+            "page_references": pages,
             "source_files": sum(f["source"] for f in files)}
 
 
@@ -179,7 +239,8 @@ def budget(files: list[dict], warnings: list[str]) -> None:
 
 SUPPORT_DIRS = {"scripts", "devscripts", "tools", "docs", "doc", "build", "ci", "benchmarks", "bench", ".github"}
 SUPPORT_FILES = {"setup.py", "noxfile.py", "conftest.py", "fabfile.py", "build.js", "build.py", "gulpfile.js", "gruntfile.js", "webpack.config.js"}
-DEFINITION = re.compile(r"\b(?:def|function|class|func|fn|struct|interface|enum|trait)\s+(?:\([^)]*\)\s*)?([A-Za-z_]\w{11,})")
+# PHP's `use function name;` imports a function; it does not define one.
+DEFINITION = re.compile(r"\b(?<!\buse\s)(?:def|function|class|func|fn|struct|interface|enum|trait)\s+(?:\([^)]*\)\s*)?([A-Za-z_]\w{11,})")
 # C-family top-level functions: a declaration at column 0 whose name is followed by "(".
 C_DEFINITION = re.compile(r"^(?!(?:return|else|if|while|for|switch|case|typedef|extern)\b)[A-Za-z_][\w \t\*&:<>,]*?[\s\*&]([A-Za-z_]\w{11,})\s*\([^;]*$", re.M)
 C_FAMILY = {".c", ".h", ".cpp", ".hpp", ".cc", ".m"}

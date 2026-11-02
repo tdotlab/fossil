@@ -145,7 +145,7 @@ def replay(path: Path) -> dict:
         if inv["digest"] != item["inventory"]["digest"]:
             raise AcquisitionError("Snapshot integrity check failed: " + item["input"])
         # Search hints steer discovery, not verdicts; they may improve between versions.
-        hints = {"symbols", "search_terms"}
+        hints = {"symbols", "search_terms", "package_name", "page_references"}
         if {k: v for k, v in public_inventory(inv).items() if k not in hints} != {k: v for k, v in item["inventory"].items() if k not in hints}:
             raise AcquisitionError("Snapshot-derived inventory does not match case ledger: " + item["input"] + note)
         return inv
