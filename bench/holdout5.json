@@ -1,0 +1,105 @@
+{
+  "note": "Fifth holdout, chosen and pinned on 2026-11-02 before any 0.6 change was written, and not run on any version until 0.6 is frozen. Same format as pairs.json. Ten pairs in ten languages. Each upstream is archived, frozen, or still holds most of the code the target took.",
+  "pairs": [
+    {
+      "id": "nu-ansi-term",
+      "target": "nushell/nu-ansi-term",
+      "ref": "31cbd083902852610a5f1174d8f58118b3938a07",
+      "upstream": "ogham/rust-ansi-term",
+      "kind": "project",
+      "evidence": "GitHub fork of ogham/rust-ansi-term, which stopped releasing in 2019. Pinned June 2022.",
+      "terms": ["ogham", "Benjamin Sago", "Sago", "rust-ansi-term", "Havvy", "Ryan Scheel", "Josh Triplett"],
+      "leaks": "The crate is named nu_ansi_term."
+    },
+    {
+      "id": "mapstructure",
+      "target": "go-viper/mapstructure",
+      "ref": "3149d67c8c9e88bee4df8a9730b6aa4134aa1c7e",
+      "upstream": "mitchellh/mapstructure",
+      "kind": "project",
+      "evidence": "GitHub fork of mitchellh/mapstructure, which was archived in July 2024; README: 'Migrating from github.com/mitchellh/mapstructure'. Pinned August 2024.",
+      "terms": ["mitchellh", "Mitchell Hashimoto", "Hashimoto"],
+      "leaks": "The package is still named mapstructure."
+    },
+    {
+      "id": "jshint",
+      "target": "jshint/jshint",
+      "ref": "f596700dbecebd96fa3143997af2a9c49d0a4a81",
+      "upstream": "jslint-org/jslint",
+      "kind": "project",
+      "evidence": "README: 'JSHint is a fork of Douglas Crockford's JSLint'. douglascrockford/JSLint now redirects to jslint-org/jslint, whose current code has been rewritten many times since. Pinned March 2011.",
+      "terms": ["Crockford", "Douglas Crockford", "JSLint"],
+      "leaks": ""
+    },
+    {
+      "id": "phpspreadsheet",
+      "target": "PHPOffice/PhpSpreadsheet",
+      "ref": "fb2edfdacfa487fd7c900a7ff24ddfdd252d59e9",
+      "upstream": "PHPOffice/PHPExcel",
+      "kind": "project",
+      "evidence": "Carries PHPExcel's history back to 2012; PHPExcel's archived README names PhpSpreadsheet as its direct successor. Pinned August 2016.",
+      "terms": ["PHPExcel", "Maarten Balliauw", "Balliauw", "Mark Baker"],
+      "leaks": "Same owner as the upstream. Identifiers like PHPExcel_ survive, because the stripping term matches whole words only."
+    },
+    {
+      "id": "c-toxcore",
+      "target": "TokTok/c-toxcore",
+      "ref": "1977d56caaff40ea9bbf6754b69bec9539a5a969",
+      "upstream": "irungentoo/toxcore",
+      "kind": "project",
+      "evidence": "GitHub fork of irungentoo/toxcore. Pinned September 2016.",
+      "terms": ["irungentoo"],
+      "leaks": "toxcore's name is in the headers and identifiers."
+    },
+    {
+      "id": "libresprite",
+      "target": "LibreSprite/LibreSprite",
+      "ref": "2d04a4b6845207329a92d0d32c4702e4ec163127",
+      "upstream": "aseprite/aseprite",
+      "kind": "project",
+      "evidence": "README: 'Aseprite (GPL fork)', forked from the last GPL version in August 2016. Aseprite has since changed license and diverged. Pinned September 2016.",
+      "terms": ["aseprite", "David Capello", "Capello"],
+      "leaks": "Aseprite's name is in many file names, which stripping does not change."
+    },
+    {
+      "id": "faust",
+      "target": "faust-streaming/faust",
+      "ref": "3b2340bc922d65e4126f7ef0f74fe24c041ea037",
+      "upstream": "robinhood/faust",
+      "kind": "project",
+      "evidence": "README: 'Python Stream Processing Fork' with a 'Why the fork' section about robinhood/faust going unmaintained. Pinned January 2021.",
+      "terms": ["robinhood", "Ask Solem", "Solem"],
+      "leaks": "The package is still named faust."
+    },
+    {
+      "id": "lite-xl",
+      "target": "lite-xl/lite-xl",
+      "ref": "850fcbf7104c89a681cd14f7eae9ccd4f8fc20e4",
+      "upstream": "rxi/lite",
+      "kind": "project",
+      "evidence": "README: 'A lightweight text editor written in Lua, adapted from Lite' (rxi/lite, frozen since 2020). Pinned December 2020.",
+      "terms": ["rxi"],
+      "leaks": ""
+    },
+    {
+      "id": "dnspy",
+      "target": "dnSpyEx/dnSpy",
+      "ref": "80df9a474b78f25a6d8768dcba121340cba3c4f7",
+      "upstream": "dnSpy/dnSpy",
+      "kind": "project",
+      "evidence": "GitHub fork of dnSpy/dnSpy, which was archived in December 2020. Pinned August 2021.",
+      "terms": ["0xd4d", "de4dot"],
+      "leaks": "dnSpy's name is the project, namespace and owner name."
+    },
+    {
+      "id": "sorcery",
+      "target": "Sorcery/sorcery",
+      "ref": "1e74903e0e66c3d7c039acc9ab5b30d104e2d23b",
+      "upstream": "NoamB/sorcery",
+      "kind": "project",
+      "evidence": "Carries NoamB/sorcery's history back to 2011; NoamB/sorcery's README: 'Sorcery has moved!' to Sorcery/sorcery. Pinned December 2016.",
+      "terms": ["NoamB", "Noam Ben-Ari", "Ben-Ari"],
+      "leaks": "The gem is still named sorcery."
+    }
+  ]
+}
