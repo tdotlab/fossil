@@ -24,7 +24,35 @@ def shingles(tokens: list[str]) -> set[bytes]:
             for i in range(0, len(tokens) - SHINGLE + 1)}
 
 
-def compare(target: dict, candidate: dict) -> dict:
+def anchored_blocks(a: list[str], b: list[str]) -> list[tuple[int, int, int]]:
+    """Matching runs grown from shared SHINGLE-token anchors, for pairs too large for a full diff.
+
+    Work is linear: at most 8 anchors are tried per start, and each run found moves past itself.
+    A run is exact token equality, like a diff block, but runs need not keep the files' order.
+    """
+    where = {}
+    for j in range(len(b) - SHINGLE + 1):
+        where.setdefault(tuple(b[j:j + SHINGLE]), []).append(j)
+    blocks, i = [], 0
+    while i <= len(a) - SHINGLE:
+        starts = where.get(tuple(a[i:i + SHINGLE]))
+        if not starts:
+            i += 1
+            continue
+        best = (0, 0)
+        for j in starts[:8]:
+            n = SHINGLE
+            while i + n < len(a) and j + n < len(b) and a[i + n] == b[j + n]:
+                n += 1
+            if n > best[0]:
+                best = (n, j)
+        blocks.append((i, best[1], best[0]))
+        i += best[0]
+    return blocks
+
+
+def compare(target: dict, candidate: dict, *, anchored: bool = True) -> dict:
+    """Overlap between two inventories. anchored=False reproduces cases from before 0.6, which skipped over-budget pairs."""
     left = [f for f in target["files"] if f["source"] and informative(f["tokens"])]
     right = [f for f in candidate["files"] if f["source"] and informative(f["tokens"])]
     index = defaultdict(set)
@@ -49,6 +77,7 @@ def compare(target: dict, candidate: dict) -> dict:
                     heapq.heapreplace(pairs, score)
     matches = []
     skipped_pairs = []
+    anchored_pairs = []
     covered = defaultdict(list)
     for _, neg_i, neg_j in sorted(pairs, reverse=True):
         a, b = left[-neg_i], right[-neg_j]
@@ -61,11 +90,17 @@ def compare(target: dict, candidate: dict) -> dict:
         else:
             ca, cb = Counter(a["tokens"]), Counter(b["tokens"])
             work = sum(n * cb[t] for t, n in ca.items())
-            if work > MAX_DIFF_WORK:
+            if work > MAX_DIFF_WORK and not anchored:
                 skipped_pairs.append({"target_path": a["path"], "candidate_path": b["path"], "reason": "deterministic diff work budget exceeded", "estimated_work": work})
                 continue
-            blocks = [(m.a, m.b, m.size) for m in SequenceMatcher(None, a["tokens"], b["tokens"], autojunk=False).get_matching_blocks()]
-            kind = "contiguous_tokens"
+            if work > MAX_DIFF_WORK:
+                # hyfetch's one shared file, neofetch, needed 16.8M operations and was skipped outright.
+                anchored_pairs.append({"target_path": a["path"], "candidate_path": b["path"], "reason": "diff work budget exceeded; matched from shared 25-token anchors instead", "estimated_work": work})
+                blocks = anchored_blocks(a["tokens"], b["tokens"])
+                kind = "anchored_tokens"
+            else:
+                blocks = [(m.a, m.b, m.size) for m in SequenceMatcher(None, a["tokens"], b["tokens"], autojunk=False).get_matching_blocks()]
+                kind = "contiguous_tokens"
         valid = [(x, y, n) for x, y, n in blocks if informative(a["tokens"][x:x+n])]
         for x, y, n in sorted(valid, key=lambda block: -block[2])[:3]:
             al = [a["token_lines"][x], a["token_lines"][x+n-1]]
@@ -92,6 +127,6 @@ def compare(target: dict, candidate: dict) -> dict:
     return {"verdict": verdict, "confidence": "high (overlap only)" if app else "limited" if matches else "insufficient",
             "direction": "undetermined", "matches": matches, "shared_dependencies": sorted(set(target["dependencies"]) & set(candidate["dependencies"])),
             "application_token_coverage": round(matched_tokens / total, 4) if total else 0,
-            "matched_application_files": len(covered), "pairs_considered": pair_count, "pairs_examined": len(pairs) - len(skipped_pairs), "skipped_pairs": skipped_pairs,
+            "matched_application_files": len(covered), "pairs_considered": pair_count, "pairs_examined": len(pairs) - len(skipped_pairs), "skipped_pairs": skipped_pairs, "anchored_pairs": anchored_pairs,
             "limitations": ["Identifier-preserving token matches miss heavy rewrites and cross-language ports.",
                             "A matching component may come from a third upstream or template; overlap alone cannot establish direction."]}

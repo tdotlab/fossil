@@ -14,6 +14,8 @@ from .report import render
 
 
 MAX_HOPS = 4
+# Recorded in each case: pairs over the diff work budget are matched from shared anchors (0.6 on), not skipped.
+ANCHORED = "anchored 25-token runs"
 
 
 def key(value: str) -> str:
@@ -34,24 +36,26 @@ def investigate(target: str, candidates: list[str], path: Path, *, discover: boo
         raise AcquisitionError("Case directory is not empty; choose a new case directory to preserve prior evidence")
     path.mkdir(parents=True, exist_ok=True)
     case = {"id": uuid.uuid4().hex[:12], "version": __version__, "created_at": datetime.now(timezone.utc).isoformat(),
-            "parameters": {"shingle_tokens": SHINGLE, "min_match_tokens": MIN_MATCH, "max_pairs": MAX_PAIRS, "max_diff_work": MAX_DIFF_WORK, "max_file_tokens": MAX_FILE_TOKENS, "max_total_tokens": MAX_TOTAL_TOKENS, "max_candidates": max_candidates},
+            "parameters": {"shingle_tokens": SHINGLE, "min_match_tokens": MIN_MATCH, "max_pairs": MAX_PAIRS, "max_diff_work": MAX_DIFF_WORK, "max_file_tokens": MAX_FILE_TOKENS, "max_total_tokens": MAX_TOTAL_TOKENS, "max_candidates": max_candidates, "diff_fallback": ANCHORED},
             "comparisons": [], "discovery": [], "leads": [], "limitations": [
                 "Analysis is bounded: 1 MB per file, 50 MB per snapshot, 10,000 files; ignored build/dependency directories and non-UTF-8/binary files are not analyzed.",
                 "Only supported source extensions are compared. Python uses native tokenization, normalizes quote style and removes docstrings; other languages/Python syntax failures use a heuristic lexer.",
                 "Source token limits: 30,000 per file and 200,000 per snapshot. Coverage is measured only within eligible analyzed application files, not the whole repository.",
-                "At most 60 candidate file pairs per repository are selected; pairs exceeding 500,000 estimated token-equality operations are skipped and recorded; heavy rewrites, short code, and cross-language ports may be missed.",
+                "At most 60 candidate file pairs per repository are selected; pairs exceeding 500,000 estimated token-equality operations are matched from shared 25-token anchors instead of a full diff, and recorded; heavy rewrites, short code, and cross-language ports may be missed.",
                 "Confidence is a transparent rule-based label, not a statistically calibrated probability.",
                 "Local Git-ignored files and obvious credential filenames are excluded. This is not a comprehensive secret scanner; snapshots may contain private source.",
                 "License files are reported as evidence; no legal conclusion about license compatibility or compliance is made."]}
     inventories = {}
 
-    def acquire(value: str, label: str) -> dict:
+    def acquire(value: str, label: str, priority: set[str] = frozenset()) -> dict:
         snapshot = path / "snapshots" / label
         if client is not None and not Path(value).expanduser().exists():
             info = client.acquire(value, snapshot)
         else:
             info = acquire_local(value, snapshot)
-        inv = inspect(snapshot)
+        inv = inspect(snapshot, priority)
+        if priority:
+            info["priority_paths"] = sorted(priority)
         info.update(snapshot=snapshot.relative_to(path).as_posix(), inventory=public_inventory(inv))
         inventories[label] = inv
         return info
@@ -76,11 +80,17 @@ def investigate(target: str, candidates: list[str], path: Path, *, discover: boo
     else:
         case["limitations"].append("Independent discovery was disabled by the operator.")
     from .assessment import assess
-    from .discovery import second_hop
+    from .discovery import search_hits, second_hop
     queue = list(leads.items())
     # A failed acquisition does not use up an evaluation, but attempts are still bounded.
     evaluated = attempts = hops = 0
     skip = {x.lower() for x in exclude} | {case["target"].get("repository", "").lower()}
+    # Links can use a repository's old name; GitHub redirects them, so compare what each name resolves to.
+    resolve = getattr(client, "canonical", None)
+    if resolve:
+        skip |= {r.lower() for r in map(resolve, exclude) if r}
+    skip.discard("")
+    resolved = {}
     position = 0
     while position < len(queue):
         value, reasons = queue[position]
@@ -89,10 +99,23 @@ def investigate(target: str, candidates: list[str], path: Path, *, discover: boo
         case["leads"].append(lead)
         if evaluated >= max_candidates or attempts >= 2 * max_candidates:
             continue
+        name = resolve(value) if resolve and not Path(value).expanduser().exists() else None
+        if name:
+            if name.lower() != key(value):
+                lead["resolves_to"] = name
+            if name.lower() in skip:
+                lead["status"] = "skipped: " + ("the target itself" if name.lower() == case["target"].get("repository", "").lower() else "excluded") + (f" (as {name})" if name.lower() != key(value) else "")
+                continue
+            ident = name.lower() + ("@" + value.partition("@")[2] if "@" in value else "")
+            if ident in resolved:
+                lead["status"] = "skipped: same repository as " + resolved[ident]
+                continue
+            resolved[ident] = value
         attempts += 1
         label = "candidate-" + str(attempts)
         try:
-            candidate = acquire(value, label)
+            hits = search_hits(case["discovery"])
+            candidate = acquire(value, label, hits.get((name or key(value)).lower(), set()))
             result = compare(inventories["target"], inventories[label])
             result = assess(result, case["target"], candidate)
             result.update(candidate=candidate, provenance=reasons)
@@ -141,7 +164,7 @@ def replay(path: Path) -> dict:
         root = (path / item["snapshot"]).resolve()
         if not root.is_relative_to(path.resolve()) or root == path.resolve():
             raise AcquisitionError("Unsafe snapshot path in case")
-        inv = inspect(root)
+        inv = inspect(root, frozenset(item.get("priority_paths", ())))
         if inv["digest"] != item["inventory"]["digest"]:
             raise AcquisitionError("Snapshot integrity check failed: " + item["input"])
         # Search hints steer discovery, not verdicts; they may improve between versions.
@@ -153,7 +176,7 @@ def replay(path: Path) -> dict:
     from .assessment import assess
     for old in case["comparisons"]:
         candidate = load(old["candidate"])
-        new = assess(compare(target, candidate), {**case["target"], "inventory": public_inventory(target)}, {**old["candidate"], "inventory": public_inventory(candidate)})
+        new = assess(compare(target, candidate, anchored=case["parameters"].get("diff_fallback") == ANCHORED), {**case["target"], "inventory": public_inventory(target)}, {**old["candidate"], "inventory": public_inventory(candidate)})
         for key in ("verdict", "direction", "matches", "application_token_coverage", "confidence", "documentary", "scope", "skipped_pairs"):
             if new[key] != old[key]:
                 raise AcquisitionError("Replay mismatch: " + key + note)

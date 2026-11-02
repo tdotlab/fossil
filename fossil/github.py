@@ -71,6 +71,14 @@ class GitHub:
         self.trail.append({"url": url, "status": "fetched", "observed_at": now, "response_sha256": digest})
         return data
 
+    def canonical(self, value: str) -> str | None:
+        """The repository GitHub serves for owner/repo, following renames and transfers; None if unknown."""
+        try:
+            name, _ = split_repository(value)
+            return repo_name(self.get("/repos/" + name).get("full_name", name)) or name
+        except AcquisitionError:
+            return None
+
     def acquire(self, value: str, destination: Path) -> dict:
         name, requested_ref = split_repository(value)
         warnings = []

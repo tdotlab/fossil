@@ -74,15 +74,19 @@ def generic_tokens(text: str) -> tuple[list[str], list[int]]:
 
 
 BUNDLED_DIRS = {"vendor", "vendored", "_vendor", "third_party", "third-party", "external", "deps",
-                "site-packages", "dist-packages", "node_modules", "bower_components"}
+                "site-packages", "dist-packages", "node_modules", "bower_components", "Pods", "Carthage"}
+# A directory named for a released version (codemirror-5.17.0, lua-5.3.5) holds someone else's code.
+VERSIONED_DIR = re.compile(r"^[A-Za-z][\w.+]*-v?\d+(?:\.\d+)+$")
 TEST_NAME = re.compile(r"^test_|_test\.go$|\.(?:test|spec)\.[jt]sx?$")
 
 
 def context(path: str, text: str) -> str:
     parts = set(Path(path).parts)
-    if parts & BUNDLED_DIRS:
+    testing = parts & {"test", "tests", "fixtures", "examples", "example"}
+    # A versioned name inside a test tree is usually a fixture package, not a bundled release.
+    if parts & BUNDLED_DIRS or (not testing and any(VERSIONED_DIR.match(d) for d in Path(path).parts[:-1])):
         return "vendored/external"
-    if parts & {"test", "tests", "fixtures", "examples", "example"} or TEST_NAME.search(Path(path).name):
+    if testing or TEST_NAME.search(Path(path).name):
         return "test/example"
     if ".min." in path or re.search(r"(?:auto.?generated|do not edit)", text[:1000], re.I):
         return "generated"
@@ -165,7 +169,7 @@ def statement(text_lines: list[str], number: int, m: re.Match, previous_link_end
     return found[:700]
 
 
-def inspect(root: Path) -> dict:
+def inspect(root: Path, priority: frozenset[str] | set[str] = frozenset()) -> dict:
     files, refs, pages, deps, licenses, warnings = [], [], [], set(), [], []
     total = 0
     paths = []
@@ -212,7 +216,7 @@ def inspect(root: Path) -> dict:
                     previous_link_end = max((x.end() for x in LINK.finditer(line[:m.start()])), default=0)
                     pages.append({"repository": owner + "/" + site, "path": rel, "line": number, "text": line[:700],
                                   "statement": statement(text_lines, number, m, previous_link_end), "ref": None, "page": m.group(0)})
-    budget(files, warnings)
+    budget(files, warnings, priority)
     manifest = "\n".join(f["path"] + ":" + f["sha256"] for f in files)
     groups = search_terms(files)
     return {"digest": hashlib.sha256(manifest.encode()).hexdigest(), "files": files, "references": refs,
@@ -222,12 +226,14 @@ def inspect(root: Path) -> dict:
             "source_files": sum(f["source"] for f in files)}
 
 
-def budget(files: list[dict], warnings: list[str]) -> None:
+def budget(files: list[dict], warnings: list[str], priority: frozenset[str] | set[str] = frozenset()) -> None:
     # Application code gets the snapshot token budget first, so vendored trees
     # that sort early (deps/, _vendor/) cannot starve the project's own source.
+    # Files a code search found go before both: a large repository's sample otherwise
+    # ends before the vendored copy the search pointed at (gofrs/uuid in bench/RESULTS.md).
     remaining = MAX_TOTAL_TOKENS
     limits = {}
-    for f in sorted(files, key=lambda f: f["context"] != "application"):
+    for f in sorted(files, key=lambda f: (f["path"] not in priority, f["context"] != "application")):
         limits[f["path"]] = min(MAX_FILE_TOKENS, remaining, len(f["tokens"]))
         remaining -= limits[f["path"]]
     for f in files:

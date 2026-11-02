@@ -61,6 +61,12 @@ class LeadTests(unittest.TestCase):
         self.assertEqual(context("bucket_test.go", ""), "test/example")
         self.assertEqual(context("src/layers.spec.ts", ""), "test/example")
         self.assertEqual(context("src/latest.go", ""), "application")
+        self.assertEqual(context("Pods/lua/lapi.c", ""), "vendored/external")
+        self.assertEqual(context("public/plugins/codemirror-5.17.0/lib/codemirror.js", ""), "vendored/external")
+        self.assertEqual(context("public/plugins/jquery.minicolors-2.2.3/jquery.minicolors.js", ""), "vendored/external")
+        self.assertEqual(context("src/parser-v2/lexer.go", ""), "application")
+        self.assertEqual(context("lib/release-1.2.js", ""), "application")
+        self.assertEqual(context("tests/data/src/pep518-3.0/setup.py", ""), "test/example")
 
     def test_javascript_function_expressions_are_searchable_definitions(self):
         p = self.repo("js/target", {"lib/strata.js": "Widget.prototype.renderLayerStack = function (layers) {\n  return layers;\n};\n"
@@ -96,6 +102,55 @@ class LeadTests(unittest.TestCase):
         service = FakeGitHub({}, [(f"junk/huge{i}", "engine.py") for i in range(6)], broken={f"junk/huge{i}" for i in range(6)})
         investigate(str(target), [], self.root / "case", discover=True, client=service, max_candidates=2)
         self.assertEqual(len(service.acquired), 4)
+
+    def test_old_names_that_redirect_to_the_target_or_an_evaluated_repository_are_not_evaluated(self):
+        class Renaming(FakeGitHub):
+            renames = {"old/target": "t/target", "old/strata": "origin/strata"}
+
+            def canonical(self, value):
+                return self.renames.get(value, value)
+
+        target = self.repo("t/target", {"engine.py": CODE})
+        upstream = self.repo("origin/strata", {"engine.py": CODE})
+        service = Renaming({"old/strata": upstream, "origin/strata": upstream}, [("old/target", "engine.py"), ("old/strata", "engine.py"), ("origin/strata", "strata/engine.py")])
+        case = investigate(str(target), [], self.root / "case", discover=True, client=service, exclude=["t/target"])
+        self.assertEqual(service.acquired, ["old/strata"])
+        status = {l["repository"]: l["status"] for l in case["leads"]}
+        self.assertEqual(status["old/target"], "skipped: excluded (as t/target)")
+        self.assertEqual(status["origin/strata"], "skipped: same repository as old/strata")
+
+    def test_a_file_code_search_found_stays_inside_a_large_candidates_sample_and_replays(self):
+        from fossil.case import replay
+
+        class Linking(FakeGitHub):
+            def get(self, route):
+                data = super().get(route)
+                for item in data["items"]:
+                    item["html_url"] = f"https://github.com/{item['repository']['full_name']}/blob/abc123/{item['path']}"
+                return data
+
+        target = self.repo("t/target", {"engine.py": CODE})
+        big = self.repo("big/app", {"app/orbit.py": OTHER * 3, "vendor/github.com/origin/strata/engine.py": CODE})
+        service = Linking({"big/app": big}, [("big/app", "vendor/github.com/origin/strata/engine.py")])
+        budget = len(inspect(big)["files"][0]["tokens"])  # the application file alone fills the sample
+        with patch("fossil.inventory.MAX_TOTAL_TOKENS", budget):
+            self.assertFalse(next(f for f in inspect(big)["files"] if f["path"].startswith("vendor"))["source"])
+            case = investigate(str(target), [], self.root / "case", discover=True, client=service, max_candidates=1)
+            self.assertEqual(case["comparisons"][0]["candidate"]["priority_paths"], ["vendor/github.com/origin/strata/engine.py"])
+            self.assertEqual(case["comparisons"][0]["verdict"], "component_overlap")
+            replay(self.root / "case")
+
+    def test_a_go_vendor_path_in_a_shared_file_names_the_upstream(self):
+        from fossil.discovery import second_hop
+        copy = self.repo("fan/copy", {"vendor/github.com/origin/strata/engine.py": CODE, "vendor/github.com/origin/strata/layers.py": LAYERS})
+        result = {"verdict": "component_overlap", "matches": [{"candidate_path": "vendor/github.com/origin/strata/engine.py"},
+                                                              {"candidate_path": "vendor/github.com/origin/strata/layers.py"}]}
+        hops = second_hop({"repository": "fan/copy"}, inspect(copy), result, set())
+        self.assertEqual([name for name, _ in hops], ["origin/strata"])
+        self.assertIn("the path vendor/github.com/origin/strata/", hops[0][1][0])
+        cache = {"verdict": "code_overlap", "matches": [{"candidate_path": "pkg/mod/github.com/!burnt!sushi/toml@v1.2.0/lex.go"},
+                                                        {"candidate_path": "pkg/mod/github.com/!burnt!sushi/toml@v1.2.0/parse.go"}]}
+        self.assertEqual([name for name, _ in second_hop({"repository": "fan/copy"}, {"references": []}, cache, set())], ["BurntSushi/toml"])
 
     def test_confirmed_copy_that_names_an_upstream_in_shared_files_leads_to_it_next(self):
         target = self.repo("t/target", {"engine.py": CODE, "layers.py": LAYERS})

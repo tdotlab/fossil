@@ -4,7 +4,7 @@ from __future__ import annotations
 import re
 from collections import OrderedDict
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import unquote, urlencode
 
 from .acquire import AcquisitionError, repo_name
 from .assessment import DERIVATION, INFLUENCE, relationship
@@ -48,6 +48,22 @@ def authored(path: str) -> bool:
     return not any(p.startswith(".") for p in parts) and not re.search(r"(?:\.lock|-lock\.json|-lock\.ya?ml|^go\.sum)$", parts[-1])
 
 
+VENDOR_PATH = re.compile(r"(?:^|/)github\.com/([\w.!-]+)/([\w.!@+-]+)/")
+BLOB = re.compile(r"^https://github\.com/([\w.-]+/[\w.-]+)/blob/[^/]+/(.+)$")
+
+
+def search_hits(trail: list[dict]) -> dict[str, set[str]]:
+    """The file paths code search found in each repository, keyed by lowercased owner/repo."""
+    hits = {}
+    for event in trail:
+        if event.get("action") == "code search":
+            for url in event.get("results") or ():
+                m = BLOB.match(url or "")
+                if m:
+                    hits.setdefault(m.group(1).lower(), set()).add(unquote(m.group(2)))
+    return hits
+
+
 CONFIRMING = {"code_overlap", "component_overlap", "corroborated_derivation", "corroborated_component", "shared_history", "declared_fork"}
 
 
@@ -55,7 +71,7 @@ def second_hop(candidate: dict, inventory: dict, result: dict, skip: set[str]) -
     """Repositories that a confirmed copy names, ranked by how much shared code names them.
 
     A copy of the target often keeps credits the target lost. A repository counts only when it is
-    named inside files that overlapped the target; the copy's other links describe the copy, not the
+    named inside files that overlapped the target, or by their vendored path; the copy's other links describe the copy, not the
     shared code. A relationship statement in the copy's docs strengthens such a lead but cannot make
     one: on its own it led to the upstream once in seven benchmark hops (bench/RESULTS.md).
     These are leads only: each still has to show source overlap with the target itself.
@@ -77,6 +93,17 @@ def second_hop(candidate: dict, inventory: dict, result: dict, skip: set[str]) -
         # such as "based on CPython" in source credits one snippet, so it counts as a plain mention.
         if credits(ref) and DOC.search(ref["path"]) and context(ref["path"], "") == "application":
             stated.setdefault(name.lower(), ref)
+    # A Go vendor tree or module cache spells out where a shared file came from:
+    # vendor/github.com/satori/go.uuid/uuid.go, pkg/mod/github.com/!burnt!sushi/toml@v1.2.0/lex.go.
+    for path in sorted(matched):
+        m = VENDOR_PATH.search(path)
+        if m:
+            owner, repo = (re.sub(r"!([a-z])", lambda c: c.group(1).upper(), x) for x in (m.group(1), m.group(2).partition("@")[0]))
+            name = repo_name(owner + "/" + repo)
+            if name and name.lower() not in skip and name.lower() != source:
+                e = found.setdefault(name.lower(), {"name": name, "files": set(), "example": None})
+                e["files"].add(path)
+                e.setdefault("path", path)
     for key, e in found.items():
         e["relation"] = key in stated
         if e["relation"]:
@@ -88,7 +115,8 @@ def second_hop(candidate: dict, inventory: dict, result: dict, skip: set[str]) -
     for e in ranked:
         basis = f"{len(e['files'])} file(s) it shares with the target" + (" and a relationship statement" if e["relation"] else "")
         ex = e["example"]
-        hops.append((e["name"], [f"Named by confirmed candidate {source} in {basis}; e.g. {ex['path']}:{ex['line']}: {ex['text'][:200]}"]))
+        where = f"{ex['path']}:{ex['line']}: {ex['text'][:200]}" if ex else f"the path {e['path']}"
+        hops.append((e["name"], [f"Named by confirmed candidate {source} in {basis}; e.g. {where}"]))
     return hops
 
 

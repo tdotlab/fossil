@@ -66,6 +66,8 @@ def render(case: dict) -> str:
             out += [f"Shared commit IDs ({len(c['shared_commits'])} sampled): " + ", ".join(f"`{s}`" for s in c["shared_commits"][:8]) + "."]
         out += ["", f"Application token coverage: {c['application_token_coverage']:.1%}; {c['matched_application_files']} matched application files. This is a bounded lexical measurement, not an ancestry probability.", "",
                 "Shared dependencies (context only): " + (", ".join(safe(x) for x in c["shared_dependencies"][:40]) or "none detected") + ".", ""]
+        if c.get("anchored_pairs"):
+            out += [f"{len(c['anchored_pairs'])} file pairs exceeded the diff work budget and were matched from shared 25-token anchors instead of a full diff; see case.json for paths.", ""]
         if c.get("skipped_pairs"):
             out += [f"{len(c['skipped_pairs'])} file pairs skipped by the deterministic diff work budget; see case.json for paths. A negative result is incomplete for those pairs.", ""]
         if not c["matches"]:

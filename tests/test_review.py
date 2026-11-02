@@ -55,7 +55,7 @@ class ReviewTests(unittest.TestCase):
         c=investigate(archives[0],[archives[1]],self.root/'case')
         self.assertEqual(c['comparisons'][0]['verdict'],'component_overlap')
 
-    def test_repetitive_comparison_is_bounded_and_records_skipped_work(self):
+    def test_repetitive_comparison_is_bounded_and_records_the_anchored_fallback(self):
         repeated=('def repetitive(alpha, beta, gamma, delta, epsilon, zeta, eta, theta, iota, kappa, lamda, mu, nu, xi, omicron, pi):\n'
                   '    temporary = alpha + beta + gamma + delta + epsilon + zeta + eta + theta\n'
                   '    return temporary + iota + kappa + lamda + mu + nu + xi + omicron + pi\n')*400
@@ -63,8 +63,14 @@ class ReviewTests(unittest.TestCase):
         command = [sys.executable, '-c', 'import json,sys;from pathlib import Path;from fossil.inventory import inspect;from fossil.compare import compare;print(json.dumps(compare(inspect(Path(sys.argv[1])),inspect(Path(sys.argv[2])))))', str(self.a), str(self.b)]
         output = subprocess.run(command,capture_output=True,text=True,timeout=4,check=True)
         r=json.loads(output.stdout)
-        self.assertTrue(r['skipped_pairs'])
-        self.assertIn('work budget',r['skipped_pairs'][0]['reason'])
+        self.assertFalse(r['skipped_pairs'])
+        self.assertIn('work budget',r['anchored_pairs'][0]['reason'])
+        self.assertEqual(r['verdict'],'code_overlap')
+        self.assertEqual({m['kind'] for m in r['matches']},{'anchored_tokens'})
+        case=investigate(str(self.a),[str(self.b)],self.root/'anchored-case')
+        self.assertEqual(case['parameters']['diff_fallback'],'anchored 25-token runs')
+        self.assertTrue(case['comparisons'][0]['anchored_pairs'])
+        replay(self.root/'anchored-case')
 
 
 if __name__=='__main__':unittest.main()
