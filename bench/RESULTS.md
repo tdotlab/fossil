@@ -1,113 +1,128 @@
 # Discovery benchmark results
 
-Measured 2026-11-01 on Windows 11, Python 3.13, with an authenticated GitHub token and default settings (4 evaluated candidates). Method and pair lists: [README.md](README.md). Raw scores: [results/](results/), where `baseline` is 0.1, `v3` is 0.2, `v5` is 0.3, and `v2`/`v4` are intermediate drafts of 0.2 and 0.3.
+Measured 2026-11-01/02 on Windows 11, Python 3.13, with an authenticated GitHub token and default settings (4 evaluated candidates). Method and pair lists: [README.md](README.md). Raw scores: [results/](results/), where `baseline` is 0.1, `v3` is 0.2, `v5` is 0.3, `v6` is 0.4, and `v2`/`v4` are intermediate drafts of 0.2 and 0.3.
 
-**Short version.** On eight pairs that no version had seen (holdout2), with every README, credit, license and attribution line removed, Fossil 0.3 found and confirmed the true upstream in 5 of 8. 0.2 confirmed 4 of 8 on the same pairs, the same day, against the same cached search results. With documentation intact both confirmed 4 of 8. On the pairs used for tuning the gains look much larger (tuning stripped 5 → 7 of 13, first holdout stripped 2 → 5 of 6), and the out-of-sample result says to discount them: one pair of improvement on eight is honest progress, not proof. No run of any version confirmed a repository that did not genuinely share code with the target.
+**Short version.** On ten pairs no version had seen (holdout3), Fossil 0.4 and 0.3 both found and confirmed the true upstream in 5 of 10, with documentation intact and with it stripped. 0.4 is a cleanup, not a gain: on the in-sample sets it confirms one more upstream than 0.3 (34 of 66 against 33), with fewer wasted evaluations. Holdout3 could barely exercise the change, because none of its five misses carries a GitHub-link credit for ranking to promote. The earlier out-of-sample step (holdout2, 0.2 → 0.3: 4 → 5 of 8 stripped) still stands as the only measured unseen gain. No run of any version confirmed a repository that did not genuinely share code with the target.
 
 ## Counts
 
 "Confirmed" means the upstream was among the evaluated candidates and reached a verdict backed by source overlap. "Found" counts the upstream anywhere in the recorded leads. Renamed repositories count as the same upstream (`kyren/rlua` is `mlua-rs/rlua`, `mishoo/UglifyJS2` is `mishoo/UglifyJS`).
 
-| Set | Condition | 0.1 found / confirmed | 0.2 found / confirmed | 0.3 found / confirmed |
-|---|---|---|---|---|
-| tuning (13) | intact | 10 / 6 | 12 / 8 | 12 / 8 |
-| tuning (13) | stripped | 3 / 1 | 6 / 5 | 7 / 7 |
-| holdout (6) | intact | not run | 4 / 3 | 4 / 4 |
-| holdout (6) | stripped | not run | 2 / 2 | 5 / 5 |
-| **holdout2 (8)** | intact | not run | 7 / 4 | 7 / 4 |
-| **holdout2 (8)** | stripped | not run | 6 / 4 | 6 / 5 |
+| Set | Condition | 0.1 found / confirmed | 0.2 | 0.3 | 0.4 |
+|---|---|---|---|---|---|
+| tuning (13) | intact | 10 / 6 | 12 / 8 | 12 / 8 | 12 / 8 |
+| tuning (13) | stripped | 3 / 1 | 6 / 5 | 7 / 7 | 7 / 7 |
+| holdout (6) | intact | not run | 4 / 3 | 4 / 4 | 5 / 5 |
+| holdout (6) | stripped | not run | 2 / 2 | 5 / 5 | 4 / 4 |
+| holdout2 (8) | intact | not run | 7 / 4 | 7 / 4 | 7 / 5 |
+| holdout2 (8) | stripped | not run | 6 / 4 | 6 / 5 | 6 / 5 |
+| **holdout3 (10)** | intact | not run | not run | 5 / 5 | 5 / 5 |
+| **holdout3 (10)** | stripped | not run | not run | 5 / 5 | 5 / 5 |
 
-Tuning is in-sample for every version. The first holdout was the honest estimate for 0.2 and is in-sample for 0.3. Holdout2 was committed before any 0.3 code was written and run once, after 0.3 was frozen at commit 1435ee6; 0.2 was run on it from a worktree of commit 10c3562. The 0.3 run reused the 0.2 run's cached searches, so the comparison isolates code changes from changes in GitHub's index.
+Each holdout was committed before the code it measures was written, and run once after that version was frozen: holdout2 for 0.3 (frozen at 1435ee6, against 0.2 from a worktree of 10c3562), holdout3 for 0.4 (frozen at a74062e, against 0.3 from a worktree of a70bd26). The second run of each pair reused the first run's cached searches, so the comparison isolates code changes from changes in GitHub's index. Every set is in-sample for every later version.
 
 ## Per pair (upstream lead rank and verdict)
 
 A second-hop lead is listed at the position it was evaluated in, which can be past #4 when failed acquisitions or hops reordered the queue.
 
-Holdout2, 0.2 and 0.3:
+Holdout3. 0.3 and 0.4 gave the same result on every pair except where shown:
 
-| Pair | Intact 0.2 | Intact 0.3 | Stripped 0.2 | Stripped 0.3 |
+| Pair | Intact | Stripped |
+|---|---|---|
+| pdfminer.six ← euske/pdfminer | not found | not found |
+| dj-rest-auth ← Tivix/django-rest-auth | #1 code overlap | #1 code overlap |
+| markdown-it ← jonschlinkert/remarkable | #1 code overlap | #1 code overlap |
+| opentofu ← hashicorp/terraform | #2 (0.3), #1 (0.4) code overlap | #1 code overlap |
+| yaml-rust2 ← chyh1990/yaml-rust | #1 corroborated | #1 code overlap |
+| zlib-ng ← madler/zlib | not found | not found |
+| htop ← hishamhm/htop | not found | not found |
+| laminas-diactoros ← zendframework/zend-diactoros | not found | not found |
+| kt-paperclip ← thoughtbot/paperclip | not found | not found |
+| jellyfin ← MediaBrowser/Emby | #1 code overlap | #1 code overlap |
+
+Holdout2, 0.3 and 0.4:
+
+| Pair | Intact 0.3 | Intact 0.4 | Stripped 0.3 | Stripped 0.4 |
 |---|---|---|---|---|
-| eza ← ogham/exa | #2 code overlap | #2 code overlap | #1 code overlap | #1 code overlap |
-| terser ← mishoo/UglifyJS | #10 not evaluated | #8 not evaluated | #8 not evaluated | #4 code overlap (second hop) |
-| golang-jwt ← dgrijalva/jwt-go | #17 not evaluated | #16 not evaluated | not found | not found |
-| nextcord ← Rapptz/discord.py | #4 code overlap | #5 code overlap | #4 code overlap | #5 code overlap |
+| eza ← ogham/exa | #2 code overlap | #1 code overlap | #1 code overlap | #1 code overlap |
+| terser ← mishoo/UglifyJS | #8 not evaluated | #4 code overlap (second hop) | #4 code overlap (second hop) | #4 code overlap (second hop) |
+| golang-jwt ← dgrijalva/jwt-go | #16 not evaluated | #16 not evaluated | not found | not found |
+| nextcord ← Rapptz/discord.py | #5 code overlap | #4 code overlap | #5 code overlap | #4 code overlap |
 | pycryptodome ← pycrypto/pycrypto | not found | not found | not found | not found |
-| angie ← nginx/nginx | #8 not evaluated | #9 not evaluated | #8 not evaluated | #9 not evaluated |
+| angie ← nginx/nginx | #9 not evaluated | #7 not evaluated | #9 not evaluated | #7 not evaluated |
 | neovim ← vim/vim | #1 code overlap | #1 code overlap | #1 code overlap | #1 code overlap |
 | mysqlclient ← farcepest/MySQLdb1 | #1 corroborated | #1 corroborated | #1 code overlap | #1 code overlap |
 
-Tuning pairs, 0.2 and 0.3:
+Tuning pairs, 0.3 and 0.4:
 
-| Pair | Intact 0.2 | Intact 0.3 | Stripped 0.2 | Stripped 0.3 |
+| Pair | Intact 0.3 | Intact 0.4 | Stripped 0.3 | Stripped 0.4 |
 |---|---|---|---|---|
 | django-q2 ← Koed00/django-q | #1 corroborated | #1 corroborated | #1 code overlap | #1 code overlap |
 | flask-caching ← thadeusb/flask-cache | #1 corroborated | #1 corroborated | not found | not found |
 | flask-restx ← noirbizarre/flask-restplus | #1 corroborated | #1 corroborated | #1 code overlap | #1 code overlap |
 | niquests ← psf/requests | #20 not evaluated | #20 not evaluated | not found | not found |
 | urllib3-future ← urllib3/urllib3 | #21 not evaluated | #21 not evaluated | not found | not found |
-| asyncclick ← pallets/click | #1 component | #1 component | #6 not evaluated | #4 code overlap |
+| asyncclick ← pallets/click | #1 component | #4 component | #4 code overlap | #4 code overlap |
 | hyfetch ← dylanaraps/neofetch (component) | #19 not evaluated | #19 not evaluated | not found | not found |
 | pip ← psf/requests (component) | not found | not found | not found | not found |
-| yt-dlp ← ytdl-org/youtube-dl | #2 corroborated | #2 corroborated | not found | #2 code overlap (second hop) |
-| valkey ← redis/redis | #3 code overlap | #3 code overlap | #1 code overlap | #1 code overlap |
+| yt-dlp ← ytdl-org/youtube-dl | #2 corroborated | #2 corroborated | #2 code overlap (second hop) | #2 code overlap (second hop) |
+| valkey ← redis/redis | #3 code overlap | #1 code overlap | #1 code overlap | #1 code overlap |
 | lodash ← jashkenas/underscore | #21 not evaluated | #21 not evaluated | not found | not found |
-| gitea ← gogs/gogs | #3 code overlap | #3 code overlap | #1 code overlap | #1 code overlap |
+| gitea ← gogs/gogs | #3 code overlap | #2 code overlap | #1 code overlap | #1 code overlap |
 | pypdf ← mfenniak/pyPdf | #4 code overlap | #4 code overlap | #4 code overlap | #4 code overlap |
 
-First holdout, 0.2 and 0.3:
+First holdout, 0.3 and 0.4:
 
-| Pair | Intact 0.2 | Intact 0.3 | Stripped 0.2 | Stripped 0.3 |
+| Pair | Intact 0.3 | Intact 0.4 | Stripped 0.3 | Stripped 0.4 |
 |---|---|---|---|---|
-| searxng ← searx/searx | #1 corroborated | #1 corroborated | not found | #4 code overlap |
+| searxng ← searx/searx | #1 corroborated | #1 corroborated | #4 code overlap | #4 code overlap |
 | flask-security ← pallets-eco/flask-security-3.0 | not found | not found | not found | not found |
-| pillow-simd ← python-pillow/Pillow | #5 not evaluated | #4 code overlap (second hop) | #4 code overlap | #3 code overlap |
-| postman-request ← request/request | #1 component | #1 component | #2 code overlap | #2 code overlap |
-| bbolt ← boltdb/bolt | not found | not found | not found | #4 code overlap (second hop) |
-| mlua ← mlua-rs/rlua | #1 component overlap | #1 component overlap | not found | #6 component overlap (second hop) |
+| pillow-simd ← python-pillow/Pillow | #4 code overlap (second hop) | #3 code overlap (second hop) | #3 code overlap | #3 code overlap |
+| postman-request ← request/request | #1 component | #2 component | #2 code overlap | #2 code overlap |
+| bbolt ← boltdb/bolt | not found | #4 code overlap (second hop) | #4 code overlap (second hop) | #4 code overlap (second hop) |
+| mlua ← mlua-rs/rlua | #1 component overlap | #1 component overlap | #6 component overlap (second hop) | not found |
 
-## What changed in 0.3
+## What changed in 0.4
 
-Each change came from a diagnosed failure on the tuning set or the first holdout:
+Both changes came from 0.3's diagnosed failures:
 
-- **Second hop.** When a candidate confirms overlap, Fossil reads the repositories it names inside the files it shares with the target, or in a relationship statement in its own docs, and evaluates the strongest two next (four per run at most). Copies keep the credits the target lost: a download manager bundling yt-dlp names youtube-dl in five shared files, a Deepin package of bbolt names boltdb/bolt, and on holdout2 GlowScript (VPython in the browser), which bundles uglify-es, names UglifyJS2 in four.
-- **Failed acquisitions no longer use a slot.** Repositories with committed virtualenvs often exceed the 10,000-entry ZIP limit; each one used to cost an evaluation (asyncclick). Attempts are capped at twice the budget, and the limit now ignores directories that are never extracted.
-- **Bundled hits rank below project source.** A code-search hit inside `site-packages`, `vendor/` or `node_modules`, or in a data or documentation file, ranks below a hit in a project's own source.
-- **Go and JS test files are tests; JS function expressions are definitions.** bbolt's queries had been benchmark names, and searxng's JavaScript produced no usable queries.
+- **Snippet credits rank below code search.** A "based on X" comment in the target's own source credits a snippet, not the project, so it now ranks below code-search hits unless it pins the exact commit it took. A statement also counts as a credit only when the linked repository is its object ("a fork of X"), not when the phrase describes the linked project ("[reef-pi] - a controller based on a Raspberry Pi"). This freed the slots that bbolt's and terser's intact runs had spent on snippet and list credits; both now reach their upstream, as their stripped runs already did.
+- **No statement-only second hops.** A confirmed copy's relationship statement in its own docs strengthens a hop backed by shared files but no longer creates one. Across every 0.3 run such hops produced twelve leads and led to the upstream once (mlua → rlua, through tiny-rlua's README); the rest were a changelog template, a tengine feature list, a bundled module's README, a "projects using bolt" entry and neovim links. That one find is the loss in the table above, and it is the price of the rule.
 
-The first 0.3 draft (`v4`) also followed "based on CPython"-style comments in a copy's source and links in its CI and packaging scripts; in bbolt one of those took the slot boltdb/bolt needed. Source-comment credits now count as plain mentions and support directories are skipped, the same rule already applied to the target's own credits.
-
-## How the second hop did
-
-Across every 0.3 run, hops backed by shared files led to the upstream in four of seven distinct cases (Pillow, youtube-dl, boltdb/bolt, UglifyJS; the misses were python/cpython and python/mypy from pip copies, and curl, never evaluated). Hops backed only by a relationship statement in a copy's docs led to the upstream once in seven (mlua → rlua, in-sample). The other six were a changelog template "adapted from pytest", a tengine feature list, a bundled Lua module's README, a "projects using bolt" entry, and two neovim links. On holdout2 they took slots in angie, nextcord and neovim without costing a confirmation, because nginx was out of reach in both versions and discord.py and vim were confirmed anyway. That is luck, not design; it is the first thing to fix.
+Hops backed by shared files are unchanged: across both versions they led to the upstream in four of seven distinct cases (Pillow, youtube-dl, boltdb/bolt, UglifyJS).
 
 ## Why the misses missed
 
-**Fork-only vocabulary** (niquests, urllib3-future, flask-caching, flask-security). Queries use names defined in the target's largest core files. In a long-lived fork those files are mostly code written after the split: niquests searches for `AsyncSession` and `AsyncSOCKSProxyManager`, flask-caching for `RedisSentinelCache`, none of which exist upstream. The results are committed virtualenvs carrying the *target*, and the upstream is absent at any result count; asking for 50 results instead of 10, or excluding bundled paths, does not help. 0.2's diagnosis ("vendored copies crowd out the upstream") was wrong.
+**No GitHub-link credit** (holdout3: pdfminer.six, kt-paperclip). pdfminer.six's README says it is "a fork of PDFMiner" and links only euske.github.io; kt-paperclip links thoughtbot/paperclip 25 times, all inside issue, changelog and rdoc URLs. Each is a plain mention, which ranks below code-search hits, so thirty hits filled the 24-lead cap first: a repository mentioned 25 times counts no more than one mentioned once. Their stripped runs confirmed copies (PDF tools bundling pdfminer; a non-fork paperclip copy) that do not name the upstream in shared files.
 
-**Credits outranking code search when docs are intact** (bbolt, terser). Snippet comments in source ("Based on: mmap-go", "Copied from etcd"), polyfill and Unicode-data credits, and a README list of projects using bolt ("reef-pi ... based on a Raspberry Pi") rank above code-search hits and fill the slots. In both pairs the stripped run did better than the intact one.
+**Copies of the upstream instead of the upstream** (htop, zlib-ng). htop's searches confirmed three unforked copies of htop 2.x at about 50% coverage each, and zlib-ng's a zlib-ng mirror and a bare-metal project bundling zlib; madler/zlib is in thousands of repositories. None of these copies is a GitHub fork or names the upstream in the files they share.
 
-**Ubiquitous upstreams** (angie). nginx code is in thousands of repositories; nginx/nginx ranked 8th–9th behind tengine and an annotated nginx tree, both of which Fossil confirmed.
+**PHP imports read as definitions** (laminas-diactoros). `use function array_key_exists;` is a PHP import, but the definition pattern takes it for a definition, so two of three queries were PHP builtins. This is a bug.
 
-**Borrowed cores** (pycryptodome). Its largest C files are cipher implementations pycrypto itself took from older public-domain code, so their names lead to libtomcrypt, the PSP SDK and Komodo, none of which overlapped enough to confirm.
+**Fork-only vocabulary** (niquests, urllib3-future, flask-caching, flask-security). Queries use names defined in the target's largest core files, which in a long-lived fork are mostly written after the split. The hits are committed virtualenvs carrying the *target*; the upstream is absent at any result count.
 
-**Renamed copies with no credits** (golang-jwt). Three repositories carrying jwt-go as an internal package were confirmed, but none names dgrijalva/jwt-go in the shared files, so there was nothing to hop to.
+**Ubiquitous upstreams** (angie, zlib-ng). nginx and zlib code is everywhere; nginx/nginx ranks 7th behind tengine and an annotated nginx tree, both confirmed.
 
-**Component pairs** (hyfetch, pip): queries come from the target's own code, not from the bundled component, and find only the target. **lodash** at its pinned commit is essentially one file and yields a single query, whose hits are old app bundles that did not confirm.
+**Borrowed cores** (pycryptodome). Its largest C files are cipher code pycrypto took from older public-domain sources, so the queries lead elsewhere.
+
+**Renamed copies with no credits** (golang-jwt). Repositories carrying jwt-go as an internal package were confirmed, but none names dgrijalva/jwt-go in shared files.
+
+**Component pairs** (hyfetch, pip) query the target's own code, not the bundled component. **lodash** at its pinned commit is one file and yields a single query.
 
 ## Next round
 
-In rough order of expected value: drop or down-weight relation-only hops; rank snippet credits in the target's source below code-search hits (as already done for copies); pick some queries from files more likely to predate a fork rather than only the largest ones; then the component and direction problems. Each needs a fresh holdout.
+Ranking is no longer where the misses are; better queries are. In rough order of expected value: replace the no-README fallback repository search, which currently searches for the subject's folder name ("subject" in every stripped bench run), with the package's declared name from its manifest (setup.py, pyproject, Cargo.toml, go.mod, gemspec, composer.json, package.json); let a repository the target's docs mention many times outrank single code-search hits; fix PHP `use function` imports; map `owner.github.io/repo` links to `owner/repo`; pick some queries from files more likely to predate a fork. Then the direction problem, where repository creation order is a weak but cheap hint. Each needs a fresh holdout; holdout3 is now in-sample.
 
 ## Other repositories that reached a confirming verdict
 
 Every one was checked by hand (description and matched files). None was a spurious match.
 
-- **Copies or bundles of the target.** Download-manager and Kodi add-ons carrying `yt_dlp/`, mlua forks, a TypeScript port of terser, apps vendoring flask-restx, asyncclick or jwt-go as internal packages, pipenv vendoring pip, bbolt packaging, a Flask-Security-Too copy.
-- **Copies of, or links in, the upstream's lineage.** yt-dlc (the intermediate fork between youtube-dl and yt-dlp), a PyPDF2 mirror, exa forks, annotated Redis and nginx trees, tengine, a detached gogs fork, disnake and qq.py (discord.py forks), MySQL-for-Python-3 and moist, vim.wasm, Pillow packaging.
-- **Projects vendoring the same third-party code.** Blender add-ons bundling PIL, a test tool bundling `request`, GlowScript bundling uglify-es.
+- **Copies or bundles of the target.** Download-manager and Kodi add-ons carrying `yt_dlp/`, mlua forks, a TypeScript port of terser, apps vendoring flask-restx, asyncclick, dj-rest-auth or jwt-go as internal packages, pipenv vendoring pip, bbolt packaging, a Flask-Security-Too copy, a jellyfin hardware-decoding fork, an OpenTofu variant and an infrastructure tool built from its code, two sites bundling markdown-it 2.2.1 for benchmarks, a cgo binding bundling zlib-ng, saphyr.
+- **Copies of, or links in, the upstream's lineage.** yt-dlc, a PyPDF2 mirror, exa forks, annotated Redis and nginx trees, tengine, a detached gogs fork, disnake and qq.py, MySQL-for-Python-3 and moist, vim.wasm, Pillow packaging, three htop 2.x builds, a paperclip copy, an old terraform copy, mini-v8 (one file borrowed from rlua).
+- **Projects vendoring the same third-party code.** Blender add-ons bundling PIL, a test tool bundling `request`, GlowScript bundling uglify-es, PDF tools bundling pdfminer, a bare-metal project bundling zlib, two Rust crates carrying yaml-rust's emitter.
 
 Fossil reports all of these as overlap with undetermined direction, which is correct. It cannot yet tell an ancestor from a descendant without Git history or an acknowledgement, and with acknowledgements stripped it more often finds descendants than ancestors.
 
 ## Limits of this measurement
 
-Twenty-seven pairs, now spanning Python, Go, Rust, JavaScript and C, all public on GitHub. Holdout2 has eight pairs, so a one-pair difference is suggestive at best. Results depend on GitHub's live code index, which changes. The tuning set and first holdout have been used repeatedly and overstate what the next unseen pairs will show.
+Thirty-seven pairs across Python, Go, Rust, JavaScript, C, C#, PHP and Ruby, all public on GitHub. Each holdout has eight to ten pairs, so a one-pair difference is suggestive at best. Results depend on GitHub's live code index, which changes. Earlier sets have been used repeatedly and overstate what the next unseen pairs will show.
