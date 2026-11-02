@@ -1,0 +1,105 @@
+{
+  "note": "Fourth holdout, chosen and pinned on 2026-11-02 before any 0.5 change was written, and not run on any version until 0.5 is frozen. Same format as pairs.json. Ten pairs across nine languages. Each upstream is archived, frozen, or still holds most of the code the target took.",
+  "pairs": [
+    {
+      "id": "fpdf2",
+      "target": "py-pdf/fpdf2",
+      "ref": "43a2090149a33d028766e88a279d4b54a8fbffff",
+      "upstream": "reingart/pyfpdf",
+      "kind": "project",
+      "evidence": "GitHub fork of reingart/pyfpdf, whose last commit is from January 2018. Pinned August 2020, after the fork had diverged.",
+      "terms": ["reingart", "Mariano Reingart", "Reingart", "pyfpdf"],
+      "leaks": "The package is still named fpdf."
+    },
+    {
+      "id": "pynose",
+      "target": "mdmintz/pynose",
+      "ref": "4e0d2bb475cdf46577c66b6dea9923877ccb09e6",
+      "upstream": "nose-devs/nose",
+      "kind": "project",
+      "evidence": "README: 'pynose is an updated version of nose, originally made by Jason Pellerin.' nose's last commit is from 2016. Pinned March 2023.",
+      "terms": ["nose-devs", "Jason Pellerin", "Pellerin"],
+      "leaks": "nose's name is in the package and identifiers."
+    },
+    {
+      "id": "colors.js",
+      "target": "DABH/colors.js",
+      "ref": "d31977467f7e45c3a0d266153a2f5cb290821bda",
+      "upstream": "Marak/colors.js",
+      "kind": "project",
+      "evidence": "LICENSE: 'Original Library - Copyright (c) Marak Squires'. Continued as @colors/colors in January 2022 after the upstream was sabotaged. Pinned February 2022.",
+      "terms": ["Marak", "Marak Squires", "Squires"],
+      "leaks": "The package is still named colors."
+    },
+    {
+      "id": "gofrs-uuid",
+      "target": "gofrs/uuid",
+      "ref": "370558f003bfe29580cd0f698d8640daccdcc45c",
+      "upstream": "satori/go.uuid",
+      "kind": "project",
+      "evidence": "README: 'This project was originally forked from the github.com/satori/go.uuid repository'. Pinned August 2018.",
+      "terms": ["satori", "Maxim Bublis", "Bublis"],
+      "leaks": ""
+    },
+    {
+      "id": "ratatui",
+      "target": "ratatui/ratatui",
+      "ref": "a9ba23bae8398b0add4ee647516b8e094dd29e3d",
+      "upstream": "fdehau/tui-rs",
+      "kind": "project",
+      "evidence": "README: 'An actively maintained tui-rs fork.' tui-rs was archived in August 2023. Pinned March 2023.",
+      "terms": ["fdehau", "Florian Dehau", "Dehau", "tui-rs"],
+      "leaks": ""
+    },
+    {
+      "id": "nuklear",
+      "target": "Immediate-Mode-UI/Nuklear",
+      "ref": "cc5ef11568c0562bd894ed3901427c0bac42c0a6",
+      "upstream": "vurtun/nuklear",
+      "kind": "project",
+      "evidence": "vurtun/nuklear was archived in December 2019 with a README saying all development moved to Immediate-Mode-UI/Nuklear. Pinned January 2020.",
+      "terms": ["vurtun", "Micha Mettke", "Mettke"],
+      "leaks": "Nuklear's name is everywhere; the single header nuklear.h is the whole library."
+    },
+    {
+      "id": "delayed_job",
+      "target": "collectiveidea/delayed_job",
+      "ref": "17ddfb53f597e45bb59bd54376791437b452fcbc",
+      "upstream": "tobi/delayed_job",
+      "kind": "project",
+      "evidence": "GitHub fork of tobi/delayed_job; README: 'a direct extraction from Shopify'. Pinned May 2009.",
+      "terms": ["tobi", "Tobias Lütke", "Tobias Lutke", "Lütke", "Shopify"],
+      "leaks": "The gem is still named delayed_job."
+    },
+    {
+      "id": "nextcloud",
+      "target": "nextcloud/server",
+      "ref": "7d95cde37d8e26e1187a828f612addd8bba251a1",
+      "upstream": "owncloud/core",
+      "kind": "project",
+      "evidence": "Nextcloud forked ownCloud in June 2016 and carries its history; at this ref the README still says 'ownCloud Core'. Pinned July 2016.",
+      "terms": ["owncloud"],
+      "leaks": "The OC and OCP namespaces and ownCloud's name are everywhere in code."
+    },
+    {
+      "id": "radarr",
+      "target": "Radarr/Radarr",
+      "ref": "3e9594f0699461ab0c5d531e1700a65b8e78806d",
+      "upstream": "Sonarr/Sonarr",
+      "kind": "project",
+      "evidence": "README: 'A fork of Sonarr to work with movies à la Couchpotato.' Pinned February 2017.",
+      "terms": ["Sonarr", "Taloth", "markus101", "kayone"],
+      "leaks": "Namespaces are still NzbDrone, Sonarr's original name."
+    },
+    {
+      "id": "hammerspoon",
+      "target": "Hammerspoon/hammerspoon",
+      "ref": "391142952277acda01de600cc2fef0c7e5c59db6",
+      "upstream": "mjolnirapp/mjolnir",
+      "kind": "project",
+      "evidence": "README: 'Hammerspoon is a fork of Mjolnir by Steven Degutis.' sdegutis/mjolnir now redirects to mjolnirapp/mjolnir. Pinned November 2014.",
+      "terms": ["sdegutis", "Steven Degutis", "Degutis", "mjolnir"],
+      "leaks": ""
+    }
+  ]
+}
