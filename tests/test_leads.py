@@ -124,15 +124,39 @@ class LeadTests(unittest.TestCase):
         case = investigate(str(target), [], self.root / "case", discover=True, client=service, max_candidates=2)
         self.assertEqual([c["candidate"]["repository"] for c in case["comparisons"]], ["fan/copy", "noise/a"])
 
-    def test_snippet_credits_and_tooling_links_in_a_copy_are_not_followed_but_its_readme_statement_is(self):
+    def test_snippet_credits_and_tooling_links_in_a_copy_are_not_followed_but_a_stated_upstream_in_shared_code_is(self):
         from fossil.discovery import second_hop
-        copy = self.repo("fan/copy", {"engine.py": "# Code based on https://github.com/python/cpython/blob/main/x.py\n" + CODE,
+        copy = self.repo("fan/copy", {"engine.py": "# Code based on https://github.com/python/cpython/blob/main/x.py\n"
+                                                   "# see https://github.com/origin/strata/issues/3\n" + CODE,
                                       ".github/sbom.py": "A = 'https://github.com/google/brotli'\n# https://github.com/google/brotli\n",
                                       "README.md": "A fork of [strata](https://github.com/origin/strata).\n"})
         inv = inspect(copy)
         result = {"verdict": "code_overlap", "matches": [{"candidate_path": "engine.py"}, {"candidate_path": ".github/sbom.py"}]}
-        names = [name for name, _ in second_hop({"repository": "fan/copy"}, inv, result, set())]
-        self.assertEqual(names, ["origin/strata"])
+        hops = second_hop({"repository": "fan/copy"}, inv, result, set())
+        self.assertEqual([name for name, _ in hops], ["origin/strata"])
+        self.assertIn("1 file(s) it shares with the target and a relationship statement", hops[0][1][0])
+
+    def test_a_copys_statement_alone_does_not_make_a_second_hop(self):
+        from fossil.discovery import second_hop
+        copy = self.repo("fan/copy", {"engine.py": CODE, "CHANGELOG/README.md": "This template is adapted from [pytest](https://github.com/pytest-dev/pytest).\n"})
+        result = {"verdict": "code_overlap", "matches": [{"candidate_path": "engine.py"}]}
+        self.assertEqual(second_hop({"repository": "fan/copy"}, inspect(copy), result, set()), [])
+
+    def test_a_list_entry_describing_the_linked_project_is_not_a_credit(self):
+        from fossil.discovery import credits
+        self.assertFalse(credits({"repository": "reef-pi/reef-pi", "text": "",
+                                  "statement": "* [reef-pi](https://github.com/reef-pi/reef-pi) - a reef controller based on a Raspberry Pi"}))
+        self.assertTrue(credits({"repository": "origin/strata", "text": "", "statement": "A fork of [strata](https://github.com/origin/strata)"}))
+        self.assertTrue(credits({"repository": "origin/strata", "text": "", "statement": "derived from https://github.com/origin/strata"}))
+        self.assertFalse(credits({"repository": "origin/strata", "text": "", "statement": "This is not a fork of https://github.com/origin/strata"}))
+
+    def test_unpinned_snippet_credits_in_target_source_rank_below_code_search_but_commit_pinned_ones_do_not(self):
+        from fossil.discovery import find_candidates
+        p = self.repo("py/target", {"engine.py": "# Based on: https://github.com/mmap/mmap-go\n"
+                                                 "# derived from https://github.com/pinned/util/commit/" + "a" * 40 + "\n" + CODE})
+        service = FakeGitHub({}, [("origin/strata", "strata/engine.py")])
+        leads = list(find_candidates({"input": "target", "metadata": {}}, inspect(p), service)[0])
+        self.assertEqual(leads[:3], ["pinned/util@" + "a" * 40, "origin/strata", "mmap/mmap-go"])
 
     def test_zip_entry_limit_ignores_directories_that_are_never_extracted(self):
         archive = self.root / "a.zip"

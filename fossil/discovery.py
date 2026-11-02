@@ -7,12 +7,26 @@ from pathlib import Path
 from urllib.parse import urlencode
 
 from .acquire import AcquisitionError, repo_name
-from .assessment import DERIVATION, INFLUENCE
+from .assessment import DERIVATION, INFLUENCE, relationship
 from .inventory import SOURCE, SUPPORT_DIRS, context
 
 
 MAX_LEADS = 24
 DOC = re.compile(r"readme|notice|copying|licen[cs]e|authors|credits|history", re.I)
+
+
+def credits(ref: dict) -> bool:
+    """Whether a reference's statement credits the linked repository as a source.
+
+    The credited project is the object of the phrase ("a fork of X", "based on X"). In a list entry such as
+    "[reef-pi](url) - a reef controller based on a Raspberry Pi" the phrase describes the linked project instead.
+    """
+    statement = ref.get("statement", ref["text"])
+    if not relationship(statement):
+        return False
+    phrase = DERIVATION.search(statement) or INFLUENCE.search(statement)
+    at = statement.lower().find(ref["repository"].lower())
+    return at < 0 or phrase.start() < at
 
 
 def own_source(path: str | None) -> bool:
@@ -34,41 +48,39 @@ CONFIRMING = {"code_overlap", "component_overlap", "corroborated_derivation", "c
 def second_hop(candidate: dict, inventory: dict, result: dict, skip: set[str]) -> list[tuple[str, list[str]]]:
     """Repositories that a confirmed copy names, ranked by how much shared code names them.
 
-    A copy of the target often keeps credits the target lost. Only references inside files
-    that overlapped the target, or relationship statements in the copy's docs, count;
-    a copy's other links describe the copy, not the shared code. These are leads only:
-    each still has to show source overlap with the target itself.
+    A copy of the target often keeps credits the target lost. A repository counts only when it is
+    named inside files that overlapped the target; the copy's other links describe the copy, not the
+    shared code. A relationship statement in the copy's docs strengthens such a lead but cannot make
+    one: on its own it led to the upstream once in seven benchmark hops (bench/RESULTS.md).
+    These are leads only: each still has to show source overlap with the target itself.
     """
     if result["verdict"] not in CONFIRMING:
         return []
     matched = {m["candidate_path"] for m in result["matches"]}
     source = (candidate.get("repository") or candidate["input"]).lower()
-    found = {}
+    found, stated = {}, {}
     for ref in inventory["references"]:
         name = repo_name(ref["repository"])
         if not name or name.lower() in skip or name.lower() == source:
             continue
         if SUPPORT_DIRS & set(Path(ref["path"]).parts[:-1]):
             continue  # CI, packaging and doc tooling link to their own dependencies
-        statement = ref.get("statement", ref["text"])
+        if ref["path"] in matched:
+            found.setdefault(name.lower(), {"name": name, "files": set(), "example": ref})["files"].add(ref["path"])
         # As for the target's own credits: a project's lineage is stated in its docs; a comment
         # such as "based on CPython" in source credits one snippet, so it counts as a plain mention.
-        relation = bool(DERIVATION.search(statement) or INFLUENCE.search(statement)) and bool(DOC.search(ref["path"])) \
-            and context(ref["path"], "") == "application"
-        if ref["path"] not in matched and not relation:
-            continue
-        entry = found.setdefault(name.lower(), {"name": name, "files": set(), "relation": False, "example": ref})
-        if ref["path"] in matched:
-            entry["files"].add(ref["path"])
-        if relation and not entry["relation"]:
-            entry["relation"], entry["example"] = True, ref
-    # One stray link in one shared file is not enough; two shared files or a stated relationship is.
+        if credits(ref) and DOC.search(ref["path"]) and context(ref["path"], "") == "application":
+            stated.setdefault(name.lower(), ref)
+    for key, e in found.items():
+        e["relation"] = key in stated
+        if e["relation"]:
+            e["example"] = stated[key]
+    # One stray link in one shared file is not enough; two shared files, or one plus a statement, is.
     score = lambda e: len(e["files"]) + 2 * e["relation"]
     ranked = sorted((e for e in found.values() if score(e) >= 2), key=lambda e: (-score(e), e["name"].lower()))
     hops = []
     for e in ranked:
-        basis = " and ".join(x for x in (f"{len(e['files'])} file(s) it shares with the target" if e["files"] else "",
-                                         "a relationship statement" if e["relation"] else "") if x)
+        basis = f"{len(e['files'])} file(s) it shares with the target" + (" and a relationship statement" if e["relation"] else "")
         ex = e["example"]
         hops.append((e["name"], [f"Named by confirmed candidate {source} in {basis}; e.g. {ex['path']}:{ex['line']}: {ex['text'][:200]}"]))
     return hops
@@ -107,12 +119,16 @@ def find_candidates(target: dict, inventory: dict, client, *, ai=None, exclude: 
         if meta.get(key):
             add(meta[key]["full_name"], "GitHub fork " + key + " metadata", 100)
     for ref in inventory["references"]:
-        relation = bool(DERIVATION.search(ref.get("statement", ref["text"])) or INFLUENCE.search(ref.get("statement", ref["text"])))
+        relation = credits(ref)
         doc = bool(DOC.search(ref["path"]))
         # A credit inside vendored, test or generated files describes that bundled code's lineage, not the
         # target's; ranking it like a project statement lets deps/*/README files crowd out code-search hits.
         bundled = context(ref["path"], "") != "application"
-        rank = 30 if relation and bundled else 90 if relation and doc else 75 if relation else 25 if doc else 10
+        # A "based on X" comment in source credits a snippet: mmap code in bbolt, a Unicode helper in
+        # terser. Those took the slots the upstream needed, so they rank below code search unless the
+        # comment pins the exact commit it took, which marks a deliberate record of borrowed code.
+        snippet = 75 if ref.get("ref") else 40
+        rank = 30 if relation and bundled else 90 if relation and doc else snippet if relation else 25 if doc else 10
         add(ref["repository"] + ("@" + ref["ref"] if ref.get("ref") else ""), f"Target reference at {ref['path']}:{ref['line']}: {ref['text'][:220]}", rank)
     trail.append({"action": "target evidence", "detail": f"Extracted {len(ranked)} non-self repository references; these are leads, not ancestry findings"})
 
@@ -143,7 +159,7 @@ def find_candidates(target: dict, inventory: dict, client, *, ai=None, exclude: 
     # Query names actually present in target acknowledgements, never a built-in mapping.
     relation_names = []
     for ref in inventory["references"]:
-        if DERIVATION.search(ref.get("statement", ref["text"])) or INFLUENCE.search(ref.get("statement", ref["text"])):
+        if credits(ref):
             n = ref["repository"].split("/")[-1]
             if n not in relation_names:
                 relation_names.append(n)

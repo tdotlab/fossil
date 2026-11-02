@@ -52,7 +52,7 @@ class DiscoveryTests(unittest.TestCase):
         leads, _ = find_candidates({"input": "target", "metadata": {}}, inv, SearchService())
         self.assertEqual(next(iter(leads)), "zzz/original")
 
-    def test_credits_inside_vendored_code_rank_below_code_search_but_own_source_credits_do_not(self):
+    def test_credits_inside_vendored_code_rank_below_own_source_credits_and_code_search(self):
         from fossil.discovery import find_candidates
         p = self.root / "target"
         (p / "deps" / "lineedit").mkdir(parents=True)
@@ -66,7 +66,7 @@ class DiscoveryTests(unittest.TestCase):
                     return {"items": [{"repository": {"full_name": "original/strata"}}]}
                 return {"items": []}
         leads = list(find_candidates({"input": "target", "metadata": {}}, inv, SearchService())[0])
-        self.assertEqual(leads[:2], ["author/snippet", "original/strata"])
+        self.assertEqual(leads[:2], ["original/strata", "author/snippet"])
         self.assertTrue(all(leads.index(f"third/party{i}") > 1 for i in range(4)))
 
     def test_search_terms_pair_definitions_from_core_files_not_imports_or_build_scripts(self):
